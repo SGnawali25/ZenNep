@@ -1,0 +1,129 @@
+.Left_Login {
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url("/img/Login_img.jpg");
+  background-position: left;
+}
+
+.Left_Login h1 {
+  font-size: 50px;
+  font-weight: bold;
+  color: #fff;
+  position: center;
+  top: 40%;
+  left: 30%;
+  position: relative;
+  font-family: "Inter";
+  margin: auto;
+  padding: 10px;
+  font-size: 100px;
+}
+
+.Right_Login {
+  font-family: "Inter";
+  position: fixed;
+  right: 0;
+  width: 30%;
+  height: 100%;
+  top: 0;
+}
+
+/* put image instead of p  */
+p {
+  position: fixed;
+  padding-right: 20px;
+  top: 0;
+  right: 0;
+}
+
+.Right_Login h1 {
+  font-size: 50px;
+  font-weight: bold;
+  position: center;
+  top: 20%;
+  left: 20%;
+  position: relative;
+  font-family: "Inter";
+  margin: auto;
+  padding: 10px;
+  font-size: 100px;
+}
+
+.Right_Login form {
+  position: center;
+  top: 20%;
+  left: 20%;
+  position: relative;
+  font-family: "Inter";
+  margin: auto;
+  padding: 10px;
+  font-size: 100px;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  width: 70%;
+  padding: 20px;
+  position: relative;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: 70%;
+  padding: 20%;
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  width: 70%;
+  padding: 20%;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 1px black solid;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+label {
+  font-size: 40px;
+  width: 45%;
+}
+
+.remember_text {
+  font-size: small;
+  display: inline-block;
+  display: block;
+}
+
+.forget_text {
+  font-size: small;
+  position: absolute;
+  right: 0;
+  display: inline-block;
+}
