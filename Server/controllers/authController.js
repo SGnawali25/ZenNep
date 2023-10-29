@@ -23,7 +23,7 @@ exports.forgotPassword = catchAsyncErrors( async(req, res, next) => {
     await user.save({validateBeforeSave: false});
 
     //create reset password url
-    const resetPasswordURL = `${req.protocol}://smartshopper.sandeshgnawali.com.np/password/reset/${resetToken}`;
+    const resetPasswordURL = `${req.protocol}://localhost:5173/${resetToken}`;
 
     const message = `<p>Your password reset link is as follow:</p>\n\n<a href = ${resetPasswordURL}>Click here </a> to reset Password
                     \n\n<p>If you have not requested this email, please contact us.</p>`;
@@ -86,6 +86,7 @@ exports.resetPassword = catchAsyncErrors( async(req, res, next) => {
 
 //Register a user
 exports.registerUser = catchAsyncErrors( async(req, res, next) => {
+    console.log(req.body)
     
 
     const {name, email, password} = req.body;
@@ -95,11 +96,25 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
         return next(new ErrorHandler('Please enter name, email, and password properly', 400));
     }
 
+    if(!req.body.image){
+        return next(new ErrorHandler('Please choose your profile picture', 400));
+    }
+
+    const result = await cloudinary.v2.uploader.upload(req.body.avatar,{
+        folder: "ZenNep/users",
+        width: 500,
+        crop: "scale"
+    })
+
 
     const user = await User.create({
         name,
         email,
         password,
+        image:{
+            public_id: result.public_id,
+            url: result.secure_url
+        }
     })
 
     sendToken(user, 200, "", res)
