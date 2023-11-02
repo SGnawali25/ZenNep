@@ -8,11 +8,11 @@ const fileUpload = require('express-fileupload');
 
 const errorMiddleware = require('./middlewares/errors')
 
-app.use(express.json());
-app.use(bodyParser.json());
+app.use(express.json({ limit: "10mb"}));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true}));
+app.use(bodyParser.json({ limit: "10mb"}));
 app.use(fileUpload());
-
 
 app.use("*",cors({
     origin: true,
@@ -25,10 +25,14 @@ app.use("*",cors({
 //Import all routes
 const auth = require('./routes/auth');
 const welcome = require('./routes/welcome');
+const place = require('./routes/place');
+const story = require('./routes/story');
 
 
 app.use('/api/v1', auth);
 app.use('/', welcome);
+app.use('/api/v1',place);
+app.use('/api/v1', story)
 
 
 

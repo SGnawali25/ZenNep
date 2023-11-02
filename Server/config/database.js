@@ -8,7 +8,7 @@ const connectDatabase = () => {
         console.log(`MongoDb Database connected with host: ${con.connection.host}`);
     }
         
-    )
+    );
 }
 
 module.exports = connectDatabase
