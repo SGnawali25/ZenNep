@@ -1,0 +1,109 @@
+.Header {
+  background: #222;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  font-family: "Inter";
+  display: flex;
+  justify-content: space-between;
+}
+.Header p {
+  color: #fff;
+  position: relative;
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  display: inline-block;
+  left: 20px;
+  width: 10%;
+}
+
+.Header_Title a {
+  color: #fff;
+  position: relative;
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  display: inline;
+  padding: 20px;
+  top: 30%;
+  left: 20px;
+  width: 80%;
+  text-decoration: none;
+}
+
+/* Story css */
+.Post {
+  position: center;
+  width: 80%;
+  padding: 20px;
+  margin: auto;
+  border-radius: 10px;
+  background-color: grey;
+  box-sizing: border-box;
+}
+.avatar_img {
+  width: 50px;
+  display: inline-block;
+}
+
+.avatar_img img {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+
+.Story_Write {
+  display: flex;
+  justify-content: space-between;
+}
+.Post_Content {
+  width: 100%;
+  display: inline-block;
+}
+.Post_Content textarea {
+  width: 98%;
+  height: 30px;
+  resize: vertical;
+  transition: 0.4s ease-in-out;
+  border-radius: 12px;
+  padding: 10px;
+}
+.Post_Content textarea:focus {
+  height: 150px;
+}
+
+.Buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.Button_Post {
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
+  transition-duration: 0.5s;
+  background-color: #222;
+  color: #fff;
+}
+
+.Button_Post:hover {
+  border: #222;
+  background-color: #fff;
+  color: #222;
+}
+/* 
+Story_View css */
+
+.Story {
+  display: flex;
+  font-family: "Inter";
+}
+.Post_img {
+  max-width: 100%;
+}
+
+.fa-regular fa-thumbs-up {
+  display: flex;
+}

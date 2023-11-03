@@ -18,9 +18,12 @@ const Login = () => {
           <label className="remember_text">
             <input type="checkbox" />
             Remember me
-            <label className="forget_text">Forget Password?</label>
+            <label className="forget_text">
+              <a href="#">Forget Password?</a>
+            </label>
           </label>
           <input type="submit" value="Login" />
+          <input type="submit" value="Signin" />
         </form>
       </div>
     </>
