@@ -10,9 +10,15 @@ function Story_View() {
           </div>
           <div className="Story_Name">UserName added a new story!</div>
         </div>
-        <img className="post_img" src="./img/Post.jpg" alt="Post"></img>
+        <div className="img_post">
+          <img className="post_img" src="./img/Post.jpg" alt="Post"></img>
+        </div>
+        <div className="Like_Comment">
+          <button className="Like">Like</button>
+          <button className="Comment">Comment</button>
+        </div>
+        <div />
       </div>
-      <i className="fa-regular fa-thumbs-up"></i>
     </div>
   );
 }

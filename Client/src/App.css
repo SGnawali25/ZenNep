@@ -1,109 +1,106 @@
-.Header {
-  background: #222;
-  padding: 20px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  right: 0;
-  font-family: "Inter";
-  display: flex;
-  justify-content: space-between;
-}
-.Header p {
-  color: #fff;
-  position: relative;
-  width: 100%;
-  font-size: 30px;
-  font-weight: bold;
-  display: inline-block;
-  left: 20px;
-  width: 10%;
-}
+/* Navbar CSS */
 
-.Header_Title a {
-  color: #fff;
-  position: relative;
-  width: 100%;
-  font-size: 30px;
-  font-weight: bold;
-  display: inline;
-  padding: 20px;
-  top: 30%;
-  left: 20px;
-  width: 80%;
+.Header-component {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   text-decoration: none;
 }
 
-/* Story css */
-.Post {
-  position: center;
-  width: 80%;
-  padding: 20px;
-  margin: auto;
-  border-radius: 10px;
-  background-color: grey;
-  box-sizing: border-box;
-}
-.avatar_img {
-  width: 50px;
-  display: inline-block;
-}
-
-.avatar_img img {
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-}
-
-.Story_Write {
-  display: flex;
-  justify-content: space-between;
-}
-.Post_Content {
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  display: inline-block;
-}
-.Post_Content textarea {
-  width: 98%;
-  height: 30px;
-  resize: vertical;
-  transition: 0.4s ease-in-out;
-  border-radius: 12px;
-  padding: 10px;
-}
-.Post_Content textarea:focus {
-  height: 150px;
+  padding: 20px;
+  transition: all 0.5s ease;
+  background: #d9cab3;
 }
 
-.Buttons {
+nav.sticky {
+  padding: 15px 20px;
+  background-color: #d9cab3;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav .nav-content {
+  height: 100%;
+  max-width: 1200px;
+  margin: auto;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
-.Button_Post {
-  border: none;
+
+nav .logo a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 35px;
+  color: #212121;
+}
+
+nav.sticky .logo a {
+  color: #f6f6f6;
+}
+
+.nav-content .nav-links {
+  display: flex;
+}
+
+.nav-content .nav-links li {
+  list-style: none;
+  margin: 0 8px;
+}
+.nav-links li a {
+  text-decoration: none;
+  color: #212121;
+  font-size: 18px;
+  font-weight: 500;
   padding: 10px;
-  border-radius: 12px;
-  transition-duration: 0.5s;
-  background-color: #222;
-  color: #fff;
+  transition: all 0.3s ease;
 }
 
-.Button_Post:hover {
-  border: #222;
-  background-color: #fff;
-  color: #222;
-}
-/* 
-Story_View css */
-
-.Story {
-  display: flex;
-  font-family: "Inter";
-}
-.Post_img {
-  max-width: 100%;
+.nav-links li a:hover {
+  color: #f6f6f6;
 }
 
-.fa-regular fa-thumbs-up {
-  display: flex;
+nav.sticky .nav-links li a:hover {
+  color: #212121;
+}
+
+.dropbtn {
+  top: 0;
+  background-color: #d9cab3;
+  text-decoration: none;
+  color: #212121;
+  padding: 0px;
+  font-weight: 800;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f6f6f6;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: #212121;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  color: #f6f6f6;
+  background-color: #d9cab3;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
 }
