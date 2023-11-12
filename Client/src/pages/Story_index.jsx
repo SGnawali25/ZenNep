@@ -1,23 +1,48 @@
 import React from "react";
+import Header from "../components/Header.jsx";
 
 function Story_index() {
   return (
-    <div>
-      <div className="Post">
-        <div className="Story_Write">
-          <div className="avatar_img">
-            <img src="./img/Login_img.jpg" alt="avatar"></img>
+    <>
+      <Header />
+      <div className="Story_container">
+        <div className="body">
+          <div className="container">
+            <div className="wrapper">
+              <section className="post">
+                <header> Write your Story</header>
+                <form>
+                  <div className="content">
+                    <img
+                      src="
+                /img/man.jpeg"
+                      alt="avatar"
+                    />
+                    <div className="details">
+                      <div className="account_name">Account Name</div>
+                    </div>
+                  </div>
+                  <textarea
+                    placeholder="What's your story?"
+                    spellCheck="false"
+                    required
+                  />
+                  <div className="options">
+                    <div className="upload_img">Upload Image</div>
+                    <ul className="list">
+                      <li>
+                        <img src="/img/upload.png" />
+                      </li>
+                    </ul>
+                  </div>
+                  <button>Post</button>
+                </form>
+              </section>
+            </div>
           </div>
-          <form className="Post_Content">
-            <textarea placeholder="Write your story here.."></textarea>
-          </form>
-        </div>
-        <div className="Buttons">
-          <button className="Button_Post">Upload Image</button>
-          <button className="Button_Post"> Post Button</button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

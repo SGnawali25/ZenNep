@@ -15,15 +15,12 @@ function App() {
 
   return (
     <div>
-      <div>
-        <Header />
-      </div>
       {/* <div>
+        <Header />
+      </div> */}
+      <div>
         <Story_index />
       </div>
-      <div>
-        <Story_View />
-      </div> */}
       {
         // <div>
         //   <Signin />
