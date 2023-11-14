@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header.jsx";
+import Story_View from "../components/Story_View.jsx";
 
 function Story_index() {
   return (
@@ -42,6 +43,8 @@ function Story_index() {
           </div>
         </div>
       </div>
+      <Story_View />
+      <Story_View />
     </>
   );
 }

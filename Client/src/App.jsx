@@ -15,17 +15,9 @@ function App() {
 
   return (
     <div>
-      {/* <div>
-        <Header />
-      </div> */}
       <div>
         <Story_index />
       </div>
-      {
-        // <div>
-        //   <Signin />
-        // </div>
-      }
     </div>
   );
 }
