@@ -6,6 +6,7 @@ const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs')
 const cloudinary = require('cloudinary')
+var ValidatePassword = require('validate-password');
 
 
 //Forgot password
@@ -70,8 +71,16 @@ exports.resetPassword = catchAsyncErrors( async(req, res, next) => {
         return next(new ErrorHandler('Password does not match', 404))
     }
 
+
     if (await user.comparePassword(req.body.password)){
         return next(new ErrorHandler('Your old password and new password must be different', 404))
+    }
+
+    var validator = new ValidatePassword();
+    var passwordData = validator.checkPassword(password); 
+
+    if(!passwordData.isValid) {
+        return next(new ErrorHandler(passwordData.validationMessage,401))
     }
 
     //setup password
@@ -90,14 +99,17 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
 
     const {name, email, password} = req.body;
 
+    var validator = new ValidatePassword();
+
     //whether user enterd email and password
     if(!email || !password || !name){
         return next(new ErrorHandler('Please enter name, email, and password properly', 400));
     }
 
-    // if(!req.body.image){
-    //     return next(new ErrorHandler('Please choose your profile picture', 400));
-    // }
+    var passwordData = validator.checkPassword(password); 
+    if(!passwordData.isValid){
+        return next(new ErrorHandler(passwordData.validationMessage, 400));
+    }
 
     // const result = await cloudinary.v2.uploader.upload(req.body.avatar,{
     //     folder: "ZenNep/users",
@@ -198,6 +210,14 @@ exports.changePassword = catchAsyncErrors( async(req, res, next) => {
         const message = "Your new passwords doesn't match with each other.";
         return next(new ErrorHandler(message, 402))
     }
+
+    var validator = new ValidatePassword();
+    var passwordData = validator.checkPassword(req.body.newPassword); 
+
+    if(!passwordData.isValid) {
+        return next(new ErrorHandler(passwordData.validationMessage,401))
+    }
+
 
     user.password = req.body.newPassword;
     await user.save()
