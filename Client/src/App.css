@@ -8,13 +8,14 @@
 }
 
 nav {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
   padding: 20px;
   transition: all 0.5s ease;
   background: #d9cab3;
+  margin-bottom: 20px;
 }
 
 nav.sticky {
@@ -23,7 +24,7 @@ nav.sticky {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-nav .nav-content {
+.nav-content {
   height: 100%;
   max-width: 1200px;
   margin: auto;
@@ -32,7 +33,7 @@ nav .nav-content {
   justify-content: space-between;
 }
 
-nav .logo a {
+.logo a {
   text-decoration: none;
   font-weight: 500;
   font-size: 35px;
@@ -103,4 +104,672 @@ nav.sticky .nav-links li a:hover {
 }
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+/* Post your Story  */
+.Story_Container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 500px;
+  height: 480px;
+  overflow: hidden;
+  background: #ffff;
+  border-radius: 10px;
+  transition: height 0.2s ease;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.container.active {
+  height: 590px;
+}
+
+.container .wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.container .wrapper section {
+  width: 100%;
+  background: #fff;
+}
+
+.container img {
+  cursor: pointer;
+}
+
+.container .post {
+  transition: margin-left 0.18s ease;
+}
+
+.container.active .post {
+  margin-left: -500px;
+}
+
+.post header {
+  font-size: 22px;
+  font-weight: 600;
+  padding: 17px 0;
+  text-align: center;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.post form {
+  margin: 20px 25px;
+}
+
+.post form .content {
+  display: flex;
+  align-items: center;
+}
+
+.post form .content img {
+  cursor: default;
+  max-width: 52px;
+}
+
+.post form .content .details {
+  margin: -3px 0 0 12px;
+}
+
+form .content .details .account_name {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+form :where(textarea, button) {
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+form textarea {
+  resize: none;
+  font-size: 18px;
+  margin-top: 30px;
+  min-height: 100px;
+}
+
+form textarea::placeholder {
+  color: #858585;
+}
+
+form textarea:focus::placeholder {
+  color: #b3b3b3;
+}
+
+form .options {
+  height: 57px;
+  margin: 15px 0;
+  padding: 0 15px;
+  border-radius: 7px;
+  border: 1px solid #b9b9b9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+form .options:hover {
+  height: 57px;
+  margin: 15px 0;
+  padding: 0 15px;
+  border-radius: 7px;
+  background-color: #b9b9b9;
+  border: 1px solid #b9b9b9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+form .options :where(.list, li) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form .options .upload_img {
+  color: #595959;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: default;
+  padding: 15px;
+}
+
+form .options .list {
+  list-style: none;
+}
+
+.options .list li {
+  height: 42px;
+  width: 42px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.options .list li:hover {
+  background: #f0f1f4;
+}
+
+.options .list li img {
+  width: 23px;
+}
+
+form button {
+  height: 53px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: no-drop;
+  border-radius: 7px;
+  background: #e2e5e9;
+  transition: all 0.3s ease;
+}
+
+form textarea:valid ~ button {
+  color: #fff;
+  cursor: pointer;
+  background: #d9cab3;
+}
+
+form textarea:valid ~ button:hover {
+  background: #cbb89c;
+}
+
+/* Story View CSS */
+
+.Story_View_Container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.Story_View {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -150px;
+  margin-bottom: -350px;
+  min-height: 100vh;
+  background: #fff;
+}
+.card {
+  position: relative;
+  width: 61%;
+  min-height: 450px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15), -5px -5px 5px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+}
+.card .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card .top .user_details {
+  display: flex;
+  align-items: center;
+}
+.card .top .user_details .profile_img {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+}
+.cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+.card .top .user_details h3 {
+  font-size: 18px;
+  color: black;
+  font-weight: 900;
+  line-height: 1em;
+  cursor: pointer;
+}
+.hour {
+  color: gray;
+  font-size: 15px;
+  font-weight: 500;
+}
+.globDot {
+  position: absolute;
+  margin-left: 5px;
+  margin-top: -4px;
+  font-size: 20px;
+  align-items: center;
+  color: #0000004b;
+}
+ul {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ul li {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-right: 48px;
+  list-style: none;
+  text-align: center;
+}
+ul li img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  margin-top: -1.5px;
+}
+.dot {
+  transform: rotate(90deg) scale(0.6);
+  cursor: pointer;
+  margin-top: -16px;
+}
+.dot img {
+  width: 50px;
+  height: 50px;
+}
+
+.message {
+  font-weight: 400;
+  margin-top: 5px;
+  color: #777;
+  line-height: 1.5em;
+}
+.imgBg {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  margin: 10px 0 15px;
+  margin-left: -20px;
+  overflow: hidden;
+}
+.coverFull {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.btns img {
+  max-width: 30px;
+  cursor: pointer;
+}
+.btns .left img {
+  margin-right: 8px;
+}
+.likes {
+  margin-top: -28px;
+  margin-left: 33px;
+  font-size: 17px;
+  color: #777;
+  text-align: center;
+  font-weight: 500;
+}
+.right h4 {
+  margin-top: 5px;
+  margin-left: 33px;
+  font-size: 17px;
+  color: #777;
+  text-align: center;
+  font-weight: 500;
+}
+.border {
+  position: relative;
+  width: 100%;
+  height: 0.5px;
+  background: #0000004b;
+  margin-top: 15px;
+}
+.icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 5px 0;
+}
+.icon img {
+  max-width: 30px;
+  cursor: pointer;
+}
+.like {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+.like img {
+  position: relative;
+  max-width: 70px;
+  cursor: pointer;
+  margin: 0 40px;
+  margin-top: -15px;
+}
+.like img:nth-child(1) {
+  width: 55px;
+  margin: 0 10px;
+}
+.like img:nth-child(2) {
+  width: 33px;
+  margin: 0 10px;
+}
+.border_bottom {
+  position: relative;
+  width: 100%;
+  height: 0.5px;
+  background: #0000004b;
+  margin-top: -15px;
+}
+.addComments {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.addComments .userimg {
+  position: relative;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+}
+.text {
+  background: #f0f2f5;
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: #262626;
+  border-radius: 20px;
+}
+input[type="text"] {
+  position: relative;
+  padding: 0 25px;
+}
+
+input[type="textarea"]::placeholder {
+  padding: 10px;
+}
+@media (max-width: 640px) {
+  .card {
+    width: 350px;
+  }
+  .imgBg {
+    width: 350px;
+  }
+}
+
+/* Home CSS */
+.Home-Container section {
+  padding: 270px 450px 435px;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: #6d9886;
+  margin-top: -20px;
+  margin-bottom: auto;
+}
+
+.home .content {
+  z-index: 888;
+  color: #fff;
+  width: 70%;
+  margin-top: 50px;
+}
+
+.home .content h1 {
+  font-size: 4em;
+  font-weight: 900;
+  letter-spacing: 5px;
+  line-height: 75px;
+  margin-bottom: 40px;
+}
+
+.home .content h1 span {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.home .content a {
+  background: #fff;
+  padding: 20px 35px;
+  color: #212121;
+  font-size: 30px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+.home .content a:hover {
+  background: #d9cab3;
+  color: #fff;
+}
+
+.home .media-icons {
+  z-index: 888;
+  position: absolute;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.5s ease;
+}
+
+.home .media-icons a img {
+  height: 50px;
+  width: 50px;
+  transition: 0.5s ease;
+}
+
+.home .media-icons a:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.home .media-icons a:hover {
+  transform: scale(1.3);
+}
+
+.home video {
+  z-index: 000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Home-Container::before {
+  z-index: 777;
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Gallery CSS */
+
+.gallery_body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #e0e0e0;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  margin-top: -20px;
+}
+
+.gallery_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.gallery_media {
+  margin-top: 20px;
+  padding: 10px;
+  max-width: 600px;
+  max-height: 500px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery_media img {
+  max-width: 100%;
+  height: auto;
+}
+
+.gallery_layer {
+  opacity: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 90%;
+  background: #fff;
+  color: #151e3f;
+  transition: all 0.9s ease;
+  .PlaceName_Display {
+    transition: all 0.9s ease;
+    transform: scale(0.1);
+  }
+}
+
+.PlaceName_Display {
+  text-align: center;
+  font-size: 600px;
+  letter-spacing: 1px;
+}
+
+.gallery_media:hover .gallery_layer {
+  opacity: 0.8;
+  width: 90%;
+  transition: all 0.5s ease;
+  p {
+    transform: scale(1);
+    transition: all 0.9s ease;
+  }
+}
+
+/* Tour FlashCard CSS */
+.blog-card {
+  @include transition(0.3s);
+  max-width: 300px;
+  margin: 15px;
+  background: #fff;
+  border: 1px solid #cb6074;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.card-img {
+  position: relative;
+  text-align: center;
+  background: #cb6074;
+}
+
+.card-img img {
+  @include transition(0.3s);
+  max-height: 180px;
+  width: 100%;
+  border-bottom: 4px solid #cb6074;
+}
+.card-img img:before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-top: solid 10px #cb6074;
+  border-left: solid 10px transparent;
+  border-right: solid 10px transparent;
+}
+
+.PlaceName {
+  position: absolute;
+  margin: 0;
+  font-size: 42px;
+  bottom: 15px;
+  width: 100%;
+  color: #fff;
+  font-family: "Slabo 27px", serif;
+}
+
+.card-text {
+  padding: 30px 15px;
+  font-family: "Roboto", sans-serif;
+  line-height: 22px;
+}
+
+.read-more {
+  @include transition(0.3s);
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  text-transform: uppercase;
+  background: #cb6074;
+  color: #fff;
+  padding: 15px;
+  margin-bottom: 30px;
+  font-family: "Oswald", sans-serif;
+}
+
+.read-more:hover {
+  background: #c123234b;
 }

@@ -30,7 +30,7 @@ function Header() {
             <li>
               <div className="dropdown">
                 <button className="dropbtn">
-                  Account Name
+                  First_Name
                   <div className="dropdown-content">
                     <a href="#">Account</a>
                     <a href="#">Logout</a>

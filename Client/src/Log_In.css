@@ -41,7 +41,7 @@
 }
 
 /* put image instead of p  */
-p {
+.login_logo {
   position: fixed;
   padding-right: 20px;
   top: 0;

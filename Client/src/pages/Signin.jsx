@@ -7,7 +7,7 @@ const Signin = () => {
         <h1>Nepal Tourism</h1>
       </div>
       {/* put image instead of Logo text */}
-      <p>Logo</p>
+      <p className="signin_logo">Logo</p>
       <div className="Right_Login">
         <h1>Sign In</h1>
         <form>
