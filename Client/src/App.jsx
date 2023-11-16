@@ -18,6 +18,8 @@ import Tour_Display from "./pages/Tour_Display";
 import Tour_FlashCard from "./components/Tour_FlashCard";
 
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
     <div>
       <Router>
