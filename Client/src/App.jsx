@@ -20,8 +20,9 @@ function App() {
   return (
     <div>
       <Router>
+        <Header/>
           <Routes>
-          <Route path='/' Component={Login} exact />
+          <Route path='/' Component={Signin} exact />
           </Routes>
       </Router>
     </div>
