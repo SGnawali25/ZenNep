@@ -46,10 +46,8 @@ exports.createPlace = catchAsyncErrors(async(req, res, next) => {
 //get all the places in the database for user
 exports.getPlaces = catchAsyncErrors(async(req, res, next) => {
     const placesCount = await Place.countDocuments();
-    const resPerPage = 2;
     const apiFeatures = new APIFeatures(Place.find(), req.query)
         .search()
-        .pagination(resPerPage)
 
     const places = await apiFeatures.query;
 

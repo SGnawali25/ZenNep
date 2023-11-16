@@ -5,9 +5,7 @@ const {isAuthenticatedUser, authorizedRoles} = require('../middlewares/auth')
 const {
     registerUser, 
     loginUser, 
-    logout, 
-    forgotPassword, 
-    resetPassword, 
+    logout,  
     userProfile,
     changePassword,
     updateProfile,
@@ -19,8 +17,6 @@ const {
 router.route('/register').post(registerUser);
 router.route('/login').post(loginUser);
 router.route('/logout').get(logout);
-router.route('/password/reset').post(forgotPassword);
-router.route('/password/reset/:token').put(resetPassword);
 router.route('/me').get(isAuthenticatedUser, userProfile);
 router.route('/password/change').put(isAuthenticatedUser, changePassword);
 router.route('/me/update').put(isAuthenticatedUser, updateProfile);
