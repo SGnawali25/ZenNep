@@ -7,7 +7,7 @@ const Login = () => {
         <h1>Nepal Tourism</h1>
       </div>
       {/* put image instead of Logo text */}
-      <p>Logo</p>
+      <p>ZenNep</p>
       <div className="Right_Login">
         <h1>Login</h1>
         <form>
@@ -18,9 +18,12 @@ const Login = () => {
           <label className="remember_text">
             <input type="checkbox" />
             Remember me
-            <label className="forget_text">Forget Password?</label>
+            <label className="forget_text">
+              <a href="#">Forget Password?</a>
+            </label>
           </label>
           <input type="submit" value="Login" />
+          <input type="submit" value="Signin" />
         </form>
       </div>
     </>

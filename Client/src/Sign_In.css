@@ -1,5 +1,3 @@
-/* Login page css */
-
 .Left_Login {
   background-size: cover;
   background-repeat: no-repeat;
@@ -52,7 +50,7 @@ p {
   font-size: 50px;
   font-weight: bold;
   position: center;
-  top: 20%;
+  top: 10%;
   left: 20%;
   position: relative;
   font-family: "Inter";
@@ -63,7 +61,7 @@ p {
 
 .Right_Login form {
   position: center;
-  top: 20%;
+  top: 10%;
   left: 20%;
   position: relative;
   font-family: "Inter";
@@ -117,17 +115,9 @@ label {
   width: 45%;
 }
 
-.remember_text {
+.agree_text {
   font-size: small;
-  display: inline-block;
-  display: block;
-}
-
-.forget_text {
-  font-size: small;
+  display: inline;
   position: absolute;
-  right: 0;
-  display: inline-block;
+  width: 70%;
 }
-
-/* Sign in page css */
