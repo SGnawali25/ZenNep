@@ -24,7 +24,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/" Component={Login} exact />
+          <Route path="/" Component={Tour_Display} exact />
         </Routes>
       </Router>
     </div>

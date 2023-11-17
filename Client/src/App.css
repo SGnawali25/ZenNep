@@ -773,3 +773,60 @@ input[type="textarea"]::placeholder {
 .read-more:hover {
   background: #c123234b;
 }
+
+.blog-wrapper {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Searchbar CSS */
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.search img {
+  height: 20px;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #212121;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9dbfaf;
+}
+
+.searchTerm:focus {
+  color: #212121;
+}
+
+.searchButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #212121;
+  background: #d9cab3;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.search_wrap {
+  width: 30%;
+  position: absolute;
+  right: 0;
+  margin: 10px;
+  padding: 10px;
+}
+
+.subheader {
+  height: 100px;
+}
