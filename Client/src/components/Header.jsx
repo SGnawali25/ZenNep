@@ -1,6 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../actions/userActions";
+import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
+import Loader from "./Loader";
 
 function Header() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const alert = useAlert();
+
+  const { user, loading } = useSelector((state) => state.auth);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    alert.success("logged out successfully");
+    navigate("/login");
+  };
   return (
     <div className="Header-component">
       <nav>
@@ -20,6 +37,9 @@ function Header() {
             </li>
             <li>
               <a href="#">Tours</a>
+            </li>
+            <li>
+              <a href="#">Stories</a>
             </li>
             <li>
               <a href="#">Contact Us</a>

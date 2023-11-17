@@ -113,7 +113,7 @@ export const loadUser = () => async(dispatch) => {
 
         const config = {withCredentials: true}
 
-        const {data} = await axios.post(`${BACKEND_PREFIX}/me`,{token}, config);
+        const {data} = await axios.get(`${BACKEND_PREFIX}/me`, config);
 
         dispatch({
             type: LOAD_USER_SUCCESS,

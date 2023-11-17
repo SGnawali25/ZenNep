@@ -37,12 +37,20 @@ const storySchema = new mongoose.Schema({
         name:{
             type: String,
             required: true,
+        },
+        userImage: {
+            type: String,
+            // required: true
         }
 
     }],
     user:{
         type: mongoose.Schema.ObjectId,
         ref: 'User',
+        required: true
+    },
+    userImage: {
+        type: String,
         required: true
     },
     createdAt: {
