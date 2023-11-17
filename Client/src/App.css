@@ -1033,3 +1033,26 @@ input:nth-of-type(5):hover ~ i {
 .Info_Right h1 {
   text-align: center;
 }
+
+/* Contact_US CSS */
+
+/* Centering the Contact_Container */
+.Contact_Container {
+  box-sizing: border-box;
+  margin-top: 100px;
+  margin-left: 25%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  height: 600px;
+  /* Centering using flexbox */
+  justify-content: center; /* Vertical centering */
+  align-items: center; /* Horizontal centering */
+}
+
+.Contact_Content {
+  margin: 20px;
+  padding: 20px;
+  max-width: 80%; /* Limit the content width within the container */
+}

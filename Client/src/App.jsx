@@ -18,6 +18,7 @@ import Tour_Display from "./pages/Tour_Display";
 import Tour_FlashCard from "./components/Tour_FlashCard";
 import Place_Info from "./pages/Place_Info";
 import About_Nepal from "./pages/About_Nepal";
+import Contact_Us from "./pages/Contact_Us";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,7 +27,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/" Component={About_Nepal} exact />
+          <Route path="/" Component={Contact_Us} exact />
         </Routes>
       </Router>
     </div>
