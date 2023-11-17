@@ -8,6 +8,7 @@ exports.createStory = catchAsyncErrors(async(req, res, next) => {
     const {caption} = req.body;
     const user = req.user.id;
     const name = req.user.name;
+    const userImage = req.user.image.url;
 
     const picture = req.body.picture;
     if (!picture){
@@ -26,6 +27,7 @@ exports.createStory = catchAsyncErrors(async(req, res, next) => {
         caption,
         user,
         name,
+        userImage,
         image: {
             public_id: result.public_id,
             url: result.secure_url
@@ -146,8 +148,9 @@ exports.commentaStoryById = catchAsyncErrors(async(req, res, next) => {
 
     const {text} = req.body;
     const user = req.user.id;
+    const userImage = req.user.image.url;
     const name = req.user.name;
-    const comment = {text, user, name};
+    const comment = {text, user, name, userImage};
     story.comments.push(comment)
     await story.save();
 
@@ -188,8 +191,11 @@ exports.deleteComment = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("there is no such a story", 404))
     }
 
-    let comments = story.comments.filter(c => c.user.toString() !== req.user.id.toString() || req.params.commentId.toString() !== c._id.toString())
+    console.log(req.user.id)
+    console.log(req.params.commentId)
+    let comments = story.comments.filter(c => c.user.toString() !== req.user._id.toString() || req.params.commentId.toString() !== c._id.toString())
 
+    console.log(comments)
     if (comments.length === story.comments.length){
         return next(new ErrorHandler("You are not allowed to delete this comment", 401))
     }

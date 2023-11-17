@@ -38,3 +38,36 @@ import {
 } from '../constants/storyConstant'
 
 const BACKEND_PREFIX = "http://localhost:4000/api/v1";
+
+export const getStories = () => async(dispatch) => {
+    try{
+
+        dispatch({
+            type: GET_STORIES_REQUEST
+        })
+
+        const config = {withCredentials: true}
+
+        let link = `${BACKEND_PREFIX}/stories` 
+
+        const { data } = await axios.get(link, config);
+
+        dispatch({
+            type: GET_STORIES_SUCCESS,
+            payload: data.stories
+        })
+
+    }catch(error){
+        dispatch({
+            type: GET_STORIES_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const clearErrors = () => async (dispatch) => {
+
+    dispatch({
+            type: CLEAR_ERRORS
+        })
+}

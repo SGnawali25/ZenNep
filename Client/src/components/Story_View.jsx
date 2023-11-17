@@ -1,6 +1,7 @@
 import React from "react";
 
-function Story_View() {
+function Story_View({story, user}) {
+
   return (
     <div className="Story_View_Container">
       <div className="Story_View">
@@ -8,11 +9,11 @@ function Story_View() {
           <div className="top">
             <div className="user_details">
               <div className="profile_img">
-                <img src="/img/man.jpeg" className="cover" />
+                <img src={story.userImage} className="cover" />
               </div>
               <h3>
-                {" "}
-                Profile Name
+                {story.name}
+                
                 <br />
                 <span className="hour"> 20h</span>
               </h3>
@@ -21,16 +22,16 @@ function Story_View() {
               <img src="/img/option.png" alt="dot" />
             </div>
           </div>
-          <h4 className="meessage"> The Story will be written here</h4>
+          <h4 className="meessage">{story.caption}</h4>
           <div className="imgBg">
-            <img src="/img/Post_img.webp" alt="bg" className="coverFull" />
+            <img src={story.image.url} alt="bg" className="coverFull" />
           </div>
           <div className="btns">
             <div className="left">
               <img src="/img/red_heart.png" alt="like" />
-              <h4 className="likes">40</h4>
+              <h4 className="likes">{story.likes.length} likes</h4>
             </div>
-            <div className="right"> 5 comments</div>
+            <div className="right">{story.comments.length} comments</div>
           </div>
           <div className="border"></div>
           <div className="icon">
@@ -42,7 +43,7 @@ function Story_View() {
           <div className="border-bottom"></div>
           <div className="addComments">
             <div className="userimg">
-              <img src="/img/man.jpeg" alt="user" className="cover" />
+              <img src={user.image.url} alt="user" className="cover" />
             </div>
             <input
               type="textarea"

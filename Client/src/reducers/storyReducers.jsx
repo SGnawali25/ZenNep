@@ -34,3 +34,36 @@ import {
     CLEAR_ERRORS
 
 } from '../constants/storyConstant'
+
+export const getStoriesReducer = (state = {stories: [] }, action) => {
+    switch (action.type) {
+        case GET_STORIES_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case GET_STORIES_SUCCESS:
+            return {
+               ...state,
+                loading: false,
+                stories: action.payload
+            }
+        
+
+        
+        case GET_STORIES_FAIL:
+            return {
+                loading:false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import store from './store'; 
+import Loader from "./components/Loader";
 
 
 import "./App.css";
@@ -14,15 +15,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Sign_In.css";
 import "./App.css";
 
+import { loadUser } from "./actions/userActions";
+
 function App() {
 
-
+  useEffect(() => {
+    store.dispatch(loadUser());
+  },[])
   return (
     <div>
       <Router>
         <Header/>
           <Routes>
           <Route path='/' Component={Signin} exact />
+          <Route path='/login' Component={Login} exact />
+          <Route path='/stories' Component={Story_index} exact />
           </Routes>
       </Router>
     </div>
