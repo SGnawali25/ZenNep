@@ -14,14 +14,22 @@ import Story_View from "./components/Story_View";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Sign_In.css";
 import "./App.css";
-
+import Home from "./pages/Home";
+import Gallery from "./pages/Gallery";
+import Tour_Display from "./pages/Tour_Display";
+import Tour_FlashCard from "./components/Tour_FlashCard";
+import Place_Info from "./pages/Place_Info";
+import About_Nepal from "./pages/About_Nepal";
+import Contact_Us from "./pages/Contact_Us";
 import { loadUser } from "./actions/userActions";
 
-function App() {
 
+
+function App() {
   useEffect(() => {
     store.dispatch(loadUser());
   },[])
+
   return (
     <div>
       <Router>

@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Story_View({story, user}) {
+function Story_View() {
+  const [like, setlike] = useState(true);
 
+  const changeLike = () => {
+    setlike((like) => {
+      return !like;
+    })};
   return (
     <div className="Story_View_Container">
       <div className="Story_View">
@@ -35,8 +40,16 @@ function Story_View({story, user}) {
           </div>
           <div className="border"></div>
           <div className="icon">
-            <div className="like">
-              <img src="/img/heart.png" alt="like" className="heart_btn" />
+            <div className="like" onClick={changeLike}>
+              {like ? (
+                <img src="/img/heart.png" alt="like" className="heart_btn" />
+              ) : (
+                <img
+                  src="/img/clicked_heart.png"
+                  alt="like"
+                  className="heart_btn"
+                />
+              )}
               <img src="/img/comment.png" alt="like" />
             </div>
           </div>

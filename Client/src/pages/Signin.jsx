@@ -52,7 +52,8 @@ const Signin = () => {
       <div className="Left_Login">
         <h1>Nepal Tourism</h1>
       </div>
-      <p>Logo</p>
+      {/* put image instead of Logo text */}
+      <p className="signin_logo">Logo</p>
       <div className="Right_Login">
         <h1>Sign In</h1>
         <form onSubmit={submitHandler}>

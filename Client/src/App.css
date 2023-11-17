@@ -1,4 +1,7 @@
 /* Navbar CSS */
+* {
+  font-family: "Inter";
+}
 
 .Header-component {
   margin: 0;
@@ -24,7 +27,7 @@ nav.sticky {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-nav .nav-content {
+.nav-content {
   height: 100%;
   max-width: 1200px;
   margin: auto;
@@ -33,7 +36,7 @@ nav .nav-content {
   justify-content: space-between;
 }
 
-nav .logo a {
+.logo a {
   text-decoration: none;
   font-weight: 500;
   font-size: 35px;
@@ -535,8 +538,6 @@ input[type="textarea"]::placeholder {
     width: 350px;
   }
 }
-
-
 /* Loader */
 .loader {
   display: block;
@@ -577,5 +578,3 @@ input[type="textarea"]::placeholder {
   display: flex;
   flex-direction: column;
 }
-
-
