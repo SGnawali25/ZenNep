@@ -7,7 +7,7 @@ function Story_index() {
     <>
       <Header />
       <div className="Story_container">
-        <div className="body">
+        <div className="Story_body">
           <div className="container">
             <div className="wrapper">
               <section className="post">

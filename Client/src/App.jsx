@@ -27,7 +27,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/" Component={Contact_Us} exact />
+          <Route path="/" Component={Story_index} exact />
         </Routes>
       </Router>
     </div>
