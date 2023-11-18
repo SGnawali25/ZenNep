@@ -1,8 +1,7 @@
-import React, {useState, useEffect, Fragment} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {useAlert} from 'react-alert';
-import {useDispatch, useSelector} from 'react-redux';
-
+import React, { useState, useEffect, Fragment } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
 
 import Story_View from "../components/Story_View.jsx";
 import Loader from "../components/Loader.jsx";
@@ -15,12 +14,12 @@ function Story_index() {
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const {stories, error} = useSelector(state => state.stories)
-  const {user, isAuthenticated} = useSelector(state =>state.auth)
+  const { stories, error } = useSelector((state) => state.stories);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
 
-  const storiesLoading =  useSelector(state => state.stories.loading);
-  const authLoading = useSelector(state => state.auth.loading);
+  const storiesLoading = useSelector((state) => state.stories.loading);
+  const authLoading = useSelector((state) => state.auth.loading);
 
   useEffect(()=> {
       setLoading(storiesLoading || authLoading);
@@ -55,34 +54,29 @@ const createPost = async(e) => {
 
   useEffect(()=> {
 
-    if (!isAuthenticated){
-      navigate('/login');
-  }
-
-    if (error) {
+    if (error){
       alert.error(error);
-      dispatch(clearErrors());
-  }
-
+      dispatch(clearErrors())
+    }
+    dispatch(loadUser())
     dispatch(getStories())
-  }, [dispatch, error, isAuthenticated])
+  }, [dispatch, error])
   
   return (
     <>
-      {loading ? <Loader /> : (
+      {loading ? (
+        <Loader />
+      ) : (
         <Fragment>
           <div className="Story_container">
-            <div className="body">
+            <div className="Story_body">
               <div className="container">
                 <div className="wrapper">
                   <section className="post">
                     <header> Write your Story</header>
                     <form onSubmit={createPost}>
                       <div className="content">
-                        <img
-                          src={user.image.url}
-                          alt="avatar"
-                        />
+                        <img src={user.image.url} alt="avatar" />
                         <div className="details">
                           <div className="account_name">{user.name}</div>
                         </div>
@@ -124,11 +118,10 @@ const createPost = async(e) => {
           </div>
           <div className="storyView">
             <div className="ind_story">
-              {stories.map(story => (
-                <Story_View key={story._id} story={story} user = {user}/>
+              {stories.map((story) => (
+                <Story_View key={story._id} story={story} user={user} />
               ))}
             </div>
-
           </div>
         </Fragment>
       )}
