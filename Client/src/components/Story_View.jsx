@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Story_View() {
-  const [like, setlike] = useState(true);
+function Story_View({story, user}) {
+  const [like, setlike] = useState(false);
+  useEffect(()=>{
+    story.likes.includes(user._id) ? setlike(true) : setlike(false)
+  })
 
   const changeLike = () => {
     setlike((like) => {

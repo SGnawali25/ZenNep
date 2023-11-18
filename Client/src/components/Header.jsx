@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../actions/userActions";
+import { loadUser, logout } from "../actions/userActions";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
 import Loader from "./Loader";
@@ -17,6 +17,7 @@ function Header() {
 
   const logoutHandler = ()  => {
       dispatch(logout());
+      dispatch(loadUser());
       alert.success("logged out successfully");
       navigate("/login")
       
@@ -56,7 +57,7 @@ function Header() {
                         First_Name
                         <div className="dropdown-content">
                           <a href="#">Account</a>
-                          <Link to="/login" onClick={logoutHandler} className="logout">Logout</Link>
+                          <a onClick={logoutHandler} className="logout">Logout</a>
                         </div>
                       </button>
                     </div>

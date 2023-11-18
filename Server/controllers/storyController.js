@@ -11,16 +11,19 @@ exports.createStory = catchAsyncErrors(async(req, res, next) => {
     const userImage = req.user.image.url;
 
     const picture = req.body.picture;
+    // console.log(req.body.caption);
     if (!picture){
         return next (new ErrorHandler("Please select a picture", 401));
     }
 
+    console.log(req.body);
     const result = await cloudinary.v2.uploader.upload(req.body.picture,{
         folder: "ZenNep/stories",
         width: 500,
         crop: "scale",
         quality: 100
     })
+    console.log(result)
 
 
     const story = await Story.create({

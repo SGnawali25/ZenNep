@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Story_View from "../components/Story_View.jsx";
 import Loader from "../components/Loader.jsx";
 
-import { getStories, clearErrors } from "../actions/storyActions.jsx";
+import { getStories, createStory, clearErrors } from "../actions/storyActions.jsx";
 import { loadUser } from "../actions/userActions.jsx";
 
 function Story_index() {
@@ -16,23 +16,56 @@ function Story_index() {
   const alert = useAlert();
 
   const {stories, error} = useSelector(state => state.stories)
-  const {user} = useSelector(state =>state.auth)
+  const {user, isAuthenticated} = useSelector(state =>state.auth)
+
 
   const storiesLoading =  useSelector(state => state.stories.loading);
   const authLoading = useSelector(state => state.auth.loading);
 
-  const loading = storiesLoading || authLoading;
+  useEffect(()=> {
+      setLoading(storiesLoading || authLoading);
+  }, [storiesLoading, authLoading])
+
+
+  const [caption, setCaption] = useState("");
+  const [picture, setPicture] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const onChange = e => {
+        
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        if (reader.readyState === 2){
+            setPicture(reader.result)
+        }
+
+    }
+    reader.readAsDataURL(e.target.files[0])
+}
+const createPost = async(e) => {
+  e.preventDefault();
+
+  dispatch(createStory(caption, picture));
+  alert.success("Story Created successfully")
+  
+  
+}
 
 
   useEffect(()=> {
 
-    if (error){
+    if (!isAuthenticated){
+      navigate('/login');
+  }
+
+    if (error) {
       alert.error(error);
-      dispatch(clearErrors())
-    }
-    dispatch(loadUser())
+      dispatch(clearErrors());
+  }
+
     dispatch(getStories())
-  }, [dispatch, error])
+  }, [dispatch, error, isAuthenticated])
   
   return (
     <>
@@ -44,30 +77,45 @@ function Story_index() {
                 <div className="wrapper">
                   <section className="post">
                     <header> Write your Story</header>
-                    <form>
+                    <form onSubmit={createPost}>
                       <div className="content">
                         <img
                           src={user.image.url}
                           alt="avatar"
                         />
                         <div className="details">
-                          <div className="account_name">Account Name</div>
+                          <div className="account_name">{user.name}</div>
                         </div>
                       </div>
                       <textarea
                         placeholder="What's your story?"
                         spellCheck="false"
+                        name="caption"
+                        value={caption}
+                        onChange = { (e) => setCaption(e.target.value)}
                         required
                       />
                       <div className="options">
-                        <div className="upload_img">Upload Image</div>
+                        <input 
+                          className="upload_img" 
+                          type="file"
+                          id="upload_img"
+                          accept = ".jpg, .png, .pdf"
+                          name="picture"
+                          onChange={onChange}
+                        />
+
+
                         <ul className="list">
                           <li>
-                            <img src="/img/upload.png" />
+                            <img src={picture} />
                           </li>
                         </ul>
                       </div>
-                      <button>Post</button>
+                      <button 
+                        type="submit"
+                        disabled={loading ? true : false}
+                        >Post</button>
                     </form>
                   </section>
                 </div>
@@ -79,9 +127,6 @@ function Story_index() {
               {stories.map(story => (
                 <Story_View key={story._id} story={story} user = {user}/>
               ))}
-              {/* <Story_View />
-              <Story_View />
-              <Story_View /> */}
             </div>
 
           </div>

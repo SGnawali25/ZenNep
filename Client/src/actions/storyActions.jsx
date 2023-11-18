@@ -65,6 +65,41 @@ export const getStories = () => async(dispatch) => {
     }
 }
 
+
+//creates a new story
+export const createStory = (caption, picture) => async(dispatch) => {
+    try{
+
+        dispatch({
+            type: CREATE_STORY_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            withCredentials: true,
+        }
+
+        let link = `${BACKEND_PREFIX}/create/story` 
+
+        const { data } = await axios.post(link, {caption, picture},config);
+        console.log(data)
+
+        dispatch({
+            type: CREATE_STORY_SUCCESS,
+            payload: data.story
+        })
+
+    }catch(error){
+        dispatch({
+            type: CREATE_STORY_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
 export const clearErrors = () => async (dispatch) => {
 
     dispatch({

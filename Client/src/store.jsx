@@ -4,13 +4,14 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from'redux-devtools-extension';
 
 import { authReducer, registerUserReducer, changePasswordReducer} from './reducers/userReducers';
-import { getStoriesReducer } from './reducers/storyReducers';
+import { getStoriesReducer, createStoryReducer } from './reducers/storyReducers';
 
 const reducer = combineReducers({
     auth: authReducer,
     registerUser: registerUserReducer,
     changePassword: changePasswordReducer,
-    stories: getStoriesReducer
+    stories: getStoriesReducer,
+    createStory: createStoryReducer
 })
 
 let initialState = {};
