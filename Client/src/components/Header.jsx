@@ -11,13 +11,12 @@ function Header() {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const {user, loading} = useSelector(state => state.auth)
+  const {user, loading, isAuthenticated} = useSelector(state => state.auth)
 
   
 
   const logoutHandler = ()  => {
       dispatch(logout());
-      dispatch(loadUser());
       alert.success("logged out successfully");
       navigate("/login")
       
@@ -30,39 +29,44 @@ function Header() {
             <nav>
               <div className="nav-content">
                 <div className="logo">
-                  <a href="#">ZenNep</a>
+                  <Link to="/">ZenNep</Link>
                 </div>
-                <ul className="nav-links">
+                <div className="nav-links">
                   <li>
-                    <a href="#">Home</a>
+                    <Link to="/">Home</Link>
                   </li>
                   <li>
-                    <a href="#">About</a>
+                    <Link to="/about">About</Link>
                   </li>
                   <li>
-                    <a href="#">Tours</a>
+                    <Link to="/places">Places</Link>
                   </li>
                   <li>
-                    <a href="#">Gallery</a>
+                    <Link to="/gallery">Gallery</Link>
+                  </li>
+                  {(<li>
+                    <Link to="/stories">Stories</Link>
+                  </li>)}
+                  <li>
+                    <Link to="/contact">Contact Us</Link>
                   </li>
                   <li>
-                    <a href="#">Stories</a>
-                  </li>
-                  <li>
-                    <a href="#">Contact Us</a>
-                  </li>
-                  <li>
-                    <div className="dropdown">
+                    {isAuthenticated ? (
+                      <div className="dropdown">
                       <button className="dropbtn">
-                        First_Name
+                        {user.name}
                         <div className="dropdown-content">
-                          <a href="#">Account</a>
-                          <a onClick={logoutHandler} className="logout">Logout</a>
+                          {/* <a href="#">Account</a> */}
+                          <Link to="/login" onClick={logoutHandler} className="logout">Logout</Link>
                         </div>
                       </button>
                     </div>
+                    ): (
+                      <Link to="/login">Login</Link> 
+                    )}
+                    
                   </li>
-                </ul>
+                </div>
               </div>
             </nav>
           </div>

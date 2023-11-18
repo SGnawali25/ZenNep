@@ -552,10 +552,6 @@ input[type="textarea"]::placeholder {
 .storyView{
   display: flex;
   flex-direction: column;
-  margin: 10em;
+  /* margin: 10em; */
 }
 
-.ind_story{
-  display: flex;
-  flex-direction: column;
-}

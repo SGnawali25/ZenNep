@@ -9,6 +9,10 @@ import {
     GET_STORIES_SUCCESS,
     GET_STORIES_FAIL,
 
+    LIKE_STORY_REQUEST,
+    LIKE_STORY_FAIL,
+    LIKE_STORY_SUCCESS,
+
     GET_STORY_DETAILS_REQUEST,
     GET_STORY_DETAILS_SUCCESS,
     GET_STORY_DETAILS_FAIL,
@@ -84,7 +88,6 @@ export const createStory = (caption, picture) => async(dispatch) => {
         let link = `${BACKEND_PREFIX}/create/story` 
 
         const { data } = await axios.post(link, {caption, picture},config);
-        console.log(data)
 
         dispatch({
             type: CREATE_STORY_SUCCESS,
@@ -94,6 +97,34 @@ export const createStory = (caption, picture) => async(dispatch) => {
     }catch(error){
         dispatch({
             type: CREATE_STORY_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const likeStory = (id) => async(dispatch) => {
+    try{
+        console.log(id);
+        dispatch({
+            type: LIKE_STORY_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            withCredentials: true,
+        }
+
+        const {data} = await axios.get(`${BACKEND_PREFIX}/story/${id}/like`, config)
+
+        dispatch({
+            type: LIKE_STORY_SUCCESS,
+            payload: data.story
+        })
+    } catch(error){
+        dispatch({
+            type: LIKE_STORY_FAIL,
             payload: error.response.data.message
         })
     }

@@ -113,7 +113,7 @@ input[type="submit"]:hover {
 }
 
 label {
-  font-size: 40px;
+  font-size: 30px;
   width: 45%;
 }
 
@@ -130,4 +130,8 @@ label {
   display: inline-block;
 }
 
+.Signup_text{
+  font-size: 20px;
+  text-align: center;
+}
 /* Sign in page css */

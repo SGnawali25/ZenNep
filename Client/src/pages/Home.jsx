@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header.jsx";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -21,7 +22,7 @@ function Home() {
               <br />
               <span className="subtext">Createing Memories Of a LifeTime</span>
             </h1>
-            <a href="#"> Get Started</a>
+            <Link to = '/login'> Get Started</Link>
           </div>
           <div className="media-icons">
             <a href="#">

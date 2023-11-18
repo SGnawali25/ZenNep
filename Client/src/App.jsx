@@ -29,11 +29,16 @@ function App() {
   return (
     <div>
       <Router>
-        <Header/>
           <Routes>
-          <Route path='/' Component={Signin} exact />
+          <Route path='/' Component={Home} exact />
+          <Route path="/signup" Component={Signin} exact />
           <Route path='/login' Component={Login} exact />
           <Route path='/stories' Component={Story_index} exact />
+          <Route path='/contact' Component={Contact_Us} exact />
+          <Route path="/about" Component={About_Nepal} exact />
+          <Route path="/gallery" Component={Gallery} exact />
+          <Route path="/place/:id" Component={Place_Info} exact />
+          <Route path="/places" Component={Tour_Display} exact />
           </Routes>
       </Router>
     </div>

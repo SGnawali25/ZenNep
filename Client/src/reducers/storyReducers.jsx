@@ -31,7 +31,10 @@ import {
     DELETE_COMMENT_STORY_SUCCESS,
     DELETE_COMMENT_STORY_FAIL,
 
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    LIKE_STORY_REQUEST,
+    LIKE_STORY_SUCCESS,
+    LIKE_STORY_FAIL
 
 } from '../constants/storyConstant'
 
@@ -50,7 +53,6 @@ export const getStoriesReducer = (state = {stories: [] }, action) => {
             }
         
 
-        
         case GET_STORIES_FAIL:
             return {
                 loading:false,
@@ -85,6 +87,39 @@ export const createStoryReducer = (state = {story: {} }, action) => {
 
         
         case CREATE_STORY_FAIL:
+            return {
+                loading:false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+export const updateStoryReducer = (state = {story: {} }, action) => {
+    switch (action.type) {
+        case LIKE_STORY_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case LIKE_STORY_SUCCESS:
+            return {
+               ...state,
+                loading: false,
+                story: action.payload
+            }
+        
+
+        
+        case LIKE_STORY_FAIL:
             return {
                 loading:false,
                 error: action.payload

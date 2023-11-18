@@ -19,8 +19,10 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated){
-        navigate('/stories')
+        navigate('/')
     }
+
+
 
     if (error){
         if (error !== "Please login to view the resources"){
@@ -29,11 +31,12 @@ const Login = () => {
         
         dispatch(clearErrors());
     }
-  },[dispatch, alert, isAuthenticated, error])
+  },[dispatch, alert, isAuthenticated]);
 
     const submitHandler = async(e) => {
       e.preventDefault();
       dispatch(login(email, password))
+      // navigate('/')
       
     }
 
@@ -70,15 +73,14 @@ const Login = () => {
               />
 
               <label className="remember_text">
-                <input type="checkbox" />
-                Remember me
 
                 <label className="forget_text">
-                  <a href="#">Forget Password?</a>
                 </label>
 
               </label>
               <input type="submit" value="Login" />
+              
+              <div className="Signup_text">New to ZenNep?<Link to="/signup">Signup</Link></div>
             </form>
           </div>
         </Fragment>

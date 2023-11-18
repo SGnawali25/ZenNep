@@ -8,6 +8,7 @@ import Loader from "../components/Loader.jsx";
 
 import { getStories, createStory, clearErrors } from "../actions/storyActions.jsx";
 import { loadUser } from "../actions/userActions.jsx";
+import Header from "../components/Header.jsx";
 
 function Story_index() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const createPost = async(e) => {
   e.preventDefault();
 
   dispatch(createStory(caption, picture));
+  dispatch(getStories());
   alert.success("Story Created successfully")
   
   
@@ -53,17 +55,22 @@ const createPost = async(e) => {
 
 
   useEffect(()=> {
+    if (!isAuthenticated){
+      alert.error("Please Login to view the stories.")
+      navigate("/login")
+    }
 
     if (error){
       alert.error(error);
       dispatch(clearErrors())
     }
-    dispatch(loadUser())
+
     dispatch(getStories())
-  }, [dispatch, error])
+  }, [dispatch, error, isAuthenticated]);
   
   return (
     <>
+      <Header/>
       {loading ? (
         <Loader />
       ) : (

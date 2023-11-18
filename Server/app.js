@@ -8,10 +8,10 @@ const fileUpload = require('express-fileupload');
 
 const errorMiddleware = require('./middlewares/errors')
 
-app.use(express.json({ limit: "10mb"}));
+app.use(express.json({ limit: "50mb"}));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ limit: "10mb", extended: true}));
-app.use(bodyParser.json({ limit: "10mb"}));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
+app.use(bodyParser.json({ limit: "50mb"}));
 app.use(fileUpload());
 
 app.use("*",cors({

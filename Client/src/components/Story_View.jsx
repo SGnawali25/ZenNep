@@ -1,15 +1,49 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { likeStory, getStories } from "../actions/storyActions";
 
 function Story_View({story, user}) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const [liker, setLiker] = useState(story.likes.length)
   const [like, setlike] = useState(false);
+  const [timeAgoString, settimeAgoString] = useState("20h ago");
+
+  const createdDate = new Date(story.createdAt);
+  const currentDate = new Date();
+  const timeDifference = currentDate - createdDate;
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  console.log(days);
+
+  // if (days > 0) {
+  //   settimeAgoString(`${days}d ago`);
+  // } else if (hours > 0) {
+  //   settimeAgoString(`${hours}h ago`);
+  // } else if (minutes > 0) {
+  //   settimeAgoString(`${minutes}m ago`);
+  // } else {
+  //   settimeAgoString(`${seconds}s ago`);
+  // }
+
   useEffect(()=>{
     story.likes.includes(user._id) ? setlike(true) : setlike(false)
-  })
+  }, [])
 
-  const changeLike = () => {
-    setlike((like) => {
-      return !like;
-    })};
+  const changeLike = async() => {
+    await dispatch(likeStory(story._id));
+    setlike(!like);
+    if (!like){
+      setLiker(liker + 1)
+    } else {
+      setLiker(liker - 1)
+    }
+    };
   return (
     <div className="Story_View_Container">
       <div className="Story_View">
@@ -23,7 +57,7 @@ function Story_View({story, user}) {
                 {story.name}
                 
                 <br />
-                <span className="hour"> 20h</span>
+                <span className="hour">{timeAgoString}</span>
               </h3>
             </div>
             <div className="dot">
@@ -37,7 +71,7 @@ function Story_View({story, user}) {
           <div className="btns">
             <div className="left">
               <img src="/img/red_heart.png" alt="like" />
-              <h4 className="likes">{story.likes.length} likes</h4>
+              <h4 className="likes">{liker} likes</h4>
             </div>
             <div className="right">{story.comments.length} comments</div>
           </div>
@@ -45,10 +79,10 @@ function Story_View({story, user}) {
           <div className="icon">
             <div className="like" onClick={changeLike}>
               {like ? (
-                <img src="/img/heart.png" alt="like" className="heart_btn" />
+                <img src="/img/clicked_heart.png" alt="like" className="heart_btn" />
               ) : (
                 <img
-                  src="/img/clicked_heart.png"
+                  src="/img/heart.png"
                   alt="like"
                   className="heart_btn"
                 />
