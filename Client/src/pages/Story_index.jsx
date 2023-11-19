@@ -19,12 +19,13 @@ function Story_index() {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
 
 
-  const storiesLoading = useSelector((state) => state.stories.loading);
+  const storiesLoading = useSelector((state) => state.stories.loading) ;
   const authLoading = useSelector((state) => state.auth.loading);
+  const createStoryLoading = useSelector((state) => state.createStory.loading);
 
   useEffect(()=> {
-      setLoading(storiesLoading || authLoading);
-  }, [storiesLoading, authLoading])
+      setLoading(storiesLoading || authLoading || createStoryLoading);
+  }, [dispatch, storiesLoading, authLoading, createStoryLoading])
 
 
   const [caption, setCaption] = useState("");
@@ -46,7 +47,9 @@ function Story_index() {
 const createPost = async(e) => {
   e.preventDefault();
 
-  dispatch(createStory(caption, picture));
+  await dispatch(createStory(caption, picture));
+  setCaption("")
+  setPicture("")
   dispatch(getStories());
   alert.success("Story Created successfully")
   
@@ -55,7 +58,7 @@ const createPost = async(e) => {
 
 
   useEffect(()=> {
-    if (!isAuthenticated){
+    if (!isAuthenticated && !loading){
       alert.error("Please Login to view the stories.")
       navigate("/login")
     }
@@ -67,11 +70,10 @@ const createPost = async(e) => {
 
     dispatch(getStories())
   }, [dispatch, error, isAuthenticated]);
-  
   return (
     <>
       <Header/>
-      {loading ? (
+      {(loading) ? (
         <Loader />
       ) : (
         <Fragment>

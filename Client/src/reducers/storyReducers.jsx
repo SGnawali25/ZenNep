@@ -136,3 +136,36 @@ export const updateStoryReducer = (state = {story: {} }, action) => {
     }
 }
 
+export const deleteStoryReducer = (state = {story: {} }, action) => {
+    switch (action.type) {
+        case DELETE_STORY_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case DELETE_STORY_SUCCESS:
+            return {
+               ...state,
+                loading: false,
+                story: action.payload
+            }
+        
+
+        
+        case DELETE_STORY_FAIL:
+            return {
+                loading:false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+

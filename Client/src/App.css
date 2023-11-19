@@ -281,10 +281,7 @@ form textarea:valid ~ button:hover {
 .Story_View {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: -150px;
   margin-bottom: -350px;
-  min-height: 100vh;
   background: #fff;
 }
 .card {
@@ -549,9 +546,11 @@ input[type="textarea"]::placeholder {
   }
 }
 
-.storyView{
+
+.ind_story{
   display: flex;
   flex-direction: column;
-  /* margin: 10em; */
 }
+
+
 

@@ -104,7 +104,6 @@ export const createStory = (caption, picture) => async(dispatch) => {
 
 export const likeStory = (id) => async(dispatch) => {
     try{
-        console.log(id);
         dispatch({
             type: LIKE_STORY_REQUEST
         })
@@ -125,6 +124,34 @@ export const likeStory = (id) => async(dispatch) => {
     } catch(error){
         dispatch({
             type: LIKE_STORY_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
+export const deleteStory = (id) => async(dispatch) => {
+    try{
+        dispatch({
+            type: DELETE_STORY_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            withCredentials: true,
+        }
+
+        const {data} = await axios.delete(`${BACKEND_PREFIX}/story/${id}`, config)
+
+        dispatch({
+            type: DELETE_STORY_SUCCESS,
+            payload: data.story
+        })
+    } catch(error){
+        dispatch({
+            type: DELETE_STORY_FAIL,
             payload: error.response.data.message
         })
     }

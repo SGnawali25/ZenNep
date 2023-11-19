@@ -39,6 +39,8 @@ function App() {
           <Route path="/gallery" Component={Gallery} exact />
           <Route path="/place/:id" Component={Place_Info} exact />
           <Route path="/places" Component={Tour_Display} exact />
+          <Route path="/places/search/:keyword" Component={Tour_Display} exact />
+
           </Routes>
       </Router>
     </div>

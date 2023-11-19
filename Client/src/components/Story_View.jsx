@@ -2,38 +2,56 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { likeStory, getStories } from "../actions/storyActions";
+import { likeStory, getStories, deleteStory } from "../actions/storyActions";
+import { useAlert } from "react-alert";
+// import {}
 
 function Story_View({story, user}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const alert = useAlert();
   
   const [liker, setLiker] = useState(story.likes.length)
   const [like, setlike] = useState(false);
   const [timeAgoString, settimeAgoString] = useState("20h ago");
 
-  const createdDate = new Date(story.createdAt);
-  const currentDate = new Date();
-  const timeDifference = currentDate - createdDate;
-  const seconds = Math.floor(timeDifference / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  console.log(days);
-
-  // if (days > 0) {
-  //   settimeAgoString(`${days}d ago`);
-  // } else if (hours > 0) {
-  //   settimeAgoString(`${hours}h ago`);
-  // } else if (minutes > 0) {
-  //   settimeAgoString(`${minutes}m ago`);
-  // } else {
-  //   settimeAgoString(`${seconds}s ago`);
-  // }
+  
 
   useEffect(()=>{
     story.likes.includes(user._id) ? setlike(true) : setlike(false)
+
+    const createdDate = new Date(story.createdAt);
+    const currentDate = new Date();
+    const timeDifference = currentDate - createdDate;
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+  if (days > 0) {
+    settimeAgoString(`${days}d ago`);
+  } else if (hours > 0) {
+    settimeAgoString(`${hours}h ago`);
+  } else if (minutes > 0) {
+    settimeAgoString(`${minutes}m ago`);
+  } else {
+    settimeAgoString(`${seconds}s ago`);
+  }
   }, [])
+
+  const deleteStoryHandler = async() => {
+
+    if (story.user.toString() != user._id.toString() && user.role != 'admin'){
+        alert.error("You are not allowed to delete this story")
+    } else {
+      await dispatch(deleteStory(story._id));
+      dispatch(getStories())
+      alert.success("Story deleted successfully");
+    }
+    
+
+
+  }
 
   const changeLike = async() => {
     await dispatch(likeStory(story._id));
@@ -61,7 +79,7 @@ function Story_View({story, user}) {
               </h3>
             </div>
             <div className="dot">
-              <img src="/img/option.png" alt="dot" />
+              <img src="/img/option.png" alt="dot" onClick={deleteStoryHandler}/>
             </div>
           </div>
           <h4 className="meessage">{story.caption}</h4>

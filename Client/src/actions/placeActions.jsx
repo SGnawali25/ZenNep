@@ -43,22 +43,23 @@ import {
 const BACKEND_PREFIX = "http://localhost:4000/api/v1";
 
 //create a place - admin
-export const createPlace = (placeData) => async (dispatch) => {
+export const createPlace = (name, location, description, images) => async (dispatch) => {
     try {
 
         dispatch({ type: CREATE_PLACE_REQUEST })
 
         const config = {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'multipart/form-data'
+            },
+            withCredentials: true,
         }
 
-        const { data } = await axios.post(`${BACKEND_PREFIX}/admin/place/new`, placeData, config)
+        const { data } = await axios.post(`${BACKEND_PREFIX}/register/place`, {name, location, description, images}, config)
 
         dispatch({
             type: CREATE_PLACE_SUCCESS,
-            payload: data
+            payload: data.place
         })
 
     } catch (error) {
@@ -69,14 +70,14 @@ export const createPlace = (placeData) => async (dispatch) => {
     }
 }
 
-export const getPlaces = (keyword = "", currentPage = 1, price) => async (dispatch) => {
+export const getPlaces = (keyword = "") => async (dispatch) => {
     try{
 
         dispatch({
             type: ALL_PLACES_REQUEST
         })
 
-        let link = `${BACKEND_PREFIX}/places`; 
+        let link = `${BACKEND_PREFIX}/places?keyword=${keyword}`; 
 
         const { data } = await axios.get(link);
 
@@ -117,6 +118,8 @@ export const getPlaceDetails = (id) => async (dispatch) => {
         })
     }
 }
+
+
 
 //clear error
 export const clearErrors = () => async (dispatch) => {

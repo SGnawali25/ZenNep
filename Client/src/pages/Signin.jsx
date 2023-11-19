@@ -2,8 +2,9 @@ import React, {useState, useEffect, Fragment} from "react";
 import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
 
-import {register, clearErrors} from '../actions/userActions'
+import {register, clearErrors, loadUser} from '../actions/userActions'
 
 
 
@@ -18,6 +19,7 @@ const Signin = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const alert = useAlert();
 
   const {loading, user, error, isAuthenticated} = useSelector(state => state.registerUser)
 
@@ -49,13 +51,12 @@ const Signin = () => {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.set('name', name);
-    formData.set('email', email);
-    formData.set('password', password);
-    formData.set("picture", picture);
 
-    dispatch(register(formData));
+    if (aggreement){
+      dispatch(register(name, email, password, picture));
+    }else {
+      alert.error("Please click on the agreement button.")
+    }
 
   }
 

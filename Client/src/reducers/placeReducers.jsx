@@ -36,21 +36,20 @@ import {
     DELETE_PLACE_REVIEW_REQUEST,
     DELETE_PLACE_REVIEW_SUCCESS,
     DELETE_PLACE_REVIEW_FAIL
-} from '../constants/productConstant';
+} from '../constants/placeConstant';
 
 
-export const placesReducer = (state = { products: []}, action ) => {
+export const placesReducer = (state = { places: []}, action ) => {
     switch (action.type) {
         case ALL_PLACES_REQUEST: 
             return {
             loading: true,
-            places: []
             }
         
         case ALL_PLACES_SUCCESS:
             return{
                 loading: false,
-                places: action.payload.places,
+                places: action.payload,
             } 
             
         case ALL_PLACES_FAIL:
@@ -71,7 +70,7 @@ export const placesReducer = (state = { products: []}, action ) => {
 }
 
 
-export const placeDetailsReducer = (state = { product: {}}, action ) => {
+export const placeDetailsReducer = (state = { place: {}}, action ) => {
     switch (action.type) {
         case PLACE_DETAILS_REQUEST: 
             return {
@@ -89,7 +88,7 @@ export const placeDetailsReducer = (state = { product: {}}, action ) => {
         case PLACE_DETAILS_FAIL:
             return{
                 ...state,
-                loading: true,
+                loading: false,
                 place: null,
                 error: action.payload
             }
@@ -106,3 +105,38 @@ export const placeDetailsReducer = (state = { product: {}}, action ) => {
 }
 
 
+
+
+export const createPlaceReducer = (state = { place: {}}, action ) => {
+    switch (action.type) {
+        case CREATE_PLACE_REQUEST: 
+            return {
+                ...state,
+            loading: true
+            }
+        
+        case CREATE_PLACE_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                place: action.payload
+            } 
+            
+        case CREATE_PLACE_FAIL:
+            return{
+                ...state,
+                loading: false,
+                place: null,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                 ...state,
+                 error: null
+            }
+            
+        default:
+            return state;
+    }
+}
