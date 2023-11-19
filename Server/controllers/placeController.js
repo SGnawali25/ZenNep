@@ -1,7 +1,8 @@
 const Place = require('../models/place');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
-const APIFeatures = require('../utils/apiFeatures')
+const APIFeatures = require('../utils/apiFeatures');
+const cloudinary = require('cloudinary');
 
 
 
@@ -11,12 +12,11 @@ exports.createPlace = catchAsyncErrors(async(req, res, next) => {
     const {name, location, description} = req.body;
     const user = req.user.id;
 
-    let picture = req.body.picture;
-    if (!picture){
+    if (!req.body.images){
         return next(new ErrorHandler("Please upload atleat one picture",401));
     }
 
-    const result = await cloudinary.v2.uploader.upload(req.body.picture,{
+    const result = await cloudinary.v2.uploader.upload(req.body.images,{
         folder: "ZenNep/places",
         width: 500,
         crop: "scale",
@@ -24,15 +24,15 @@ exports.createPlace = catchAsyncErrors(async(req, res, next) => {
     })
 
 
-    picture = [{public_id: result.public_id, url: result.secure_url}]
-
-
     const place = await Place.create({
         name,
         location,
         description,
         user,
-        picture
+        images: {
+            public_id: result.public_id,
+            url: result.secure_url
+        }
     })
     
     res.status(200).json({
@@ -46,10 +46,9 @@ exports.createPlace = catchAsyncErrors(async(req, res, next) => {
 //get all the places in the database for user
 exports.getPlaces = catchAsyncErrors(async(req, res, next) => {
     const placesCount = await Place.countDocuments();
-    const apiFeatures = new APIFeatures(Place.find(), req.query)
-        .search()
+    let places = await Place.find().sort({ createdAt: -1 });
 
-    const places = await apiFeatures.query;
+    places = places.filter(p => p.location.toLowerCase().includes(req.query.keyword.toLowerCase()))
 
     res.status(200).json({
         success: true,

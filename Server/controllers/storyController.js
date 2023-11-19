@@ -40,7 +40,7 @@ exports.createStory = catchAsyncErrors(async(req, res, next) => {
 })
 
 exports.getStories = catchAsyncErrors(async(req, res, next) => {
-    const stories = await Story.find();
+    const stories = await Story.find().sort({ createdAt: -1 });
 
     res.status(200).json({
         status: true,

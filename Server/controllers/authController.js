@@ -11,7 +11,6 @@ var ValidatePassword = require('validate-password');
 //Register a user
 exports.registerUser = catchAsyncErrors( async(req, res, next) => {
     
-
     const {name, email, password} = req.body;
 
     var validator = new ValidatePassword();
@@ -26,21 +25,27 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
         return next(new ErrorHandler(passwordData.validationMessage, 400));
     }
 
-    // const result = await cloudinary.v2.uploader.upload(req.body.avatar,{
-    //     folder: "ZenNep/users",
-    //     width: 500,
-    //     crop: "scale"
-    // })
+    if(!req.body.picture){
+        return next(new ErrorHandler('Please select your profile picture', 400));
+    }
+
+
+
+    const result = await cloudinary.v2.uploader.upload(req.body.picture,{
+        folder: "ZenNep/users",
+        width: 500,
+        crop: "scale"
+    })
 
 
     const user = await User.create({
         name,
         email,
         password,
-        // image:{
-        //     public_id: result.public_id,
-        //     url: result.secure_url
-        // }
+        image:{
+            public_id: result.public_id,
+            url: result.secure_url
+        }
     })
 
     sendToken(user, 200, "", res)
@@ -85,7 +90,7 @@ exports.logout = catchAsyncErrors( async(req, res, next) => {
         httpOnly: true
     })
 
-    
+
     res.status(200).json({
         success: true,
         message: "logout succesful"
