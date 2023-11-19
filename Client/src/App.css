@@ -1,12 +1,10 @@
 /* Navbar CSS */
-* {
-  font-family: "Inter";
-}
 
 .Header-component {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  text-decoration: none;
 }
 
 nav {
@@ -15,11 +13,18 @@ nav {
   left: 0;
   width: 100%;
   padding: 20px;
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
   background: #d9cab3;
+  margin-bottom: 20px;
 }
 
-nav .nav-content {
+nav.sticky {
+  padding: 15px 20px;
+  background-color: #d9cab3;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-content {
   height: 100%;
   max-width: 1200px;
   margin: auto;
@@ -27,30 +32,41 @@ nav .nav-content {
   align-items: center;
   justify-content: space-between;
 }
-nav .logo a {
+
+.logo a {
+  text-decoration: none;
   font-weight: 500;
   font-size: 35px;
   color: #212121;
-  text-decoration: none;
 }
+
+nav.sticky .logo a {
+  color: #f6f6f6;
+}
+
 .nav-content .nav-links {
   display: flex;
-  width: 70%;
-  justify-content: space-between;
 }
+
 .nav-content .nav-links li {
-  display: block;
+  list-style: none;
+  margin: 0 8px;
 }
 .nav-links li a {
   text-decoration: none;
-  color: #0e2431;
+  color: #212121;
   font-size: 18px;
   font-weight: 500;
-  padding: 10px 4px;
+  padding: 10px;
   transition: all 0.3s ease;
 }
+
 .nav-links li a:hover {
-  color: #fff;
+  color: #f6f6f6;
+}
+
+nav.sticky .nav-links li a:hover {
+  color: #212121;
 }
 
 .dropbtn {
@@ -98,7 +114,7 @@ nav .logo a {
   font-family: "Poppins", sans-serif;
 }
 
-.Story_body {
+.body {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -274,14 +290,17 @@ form textarea:valid ~ button:hover {
 /* Story View CSS */
 
 .Story_View_Container {
-  margin: 2em 5em 28em 5em;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 .Story_View {
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-top: -150px;
   margin-bottom: -350px;
+  min-height: 100vh;
   background: #fff;
 }
 .card {
@@ -516,41 +535,241 @@ input[type="textarea"]::placeholder {
     width: 350px;
   }
 }
-/* Loader */
-.loader {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20%;
-  width: 80px;
-  height: 80px;
-  padding-left: 0;
+
+/* Home CSS */
+.Home-Container section {
+  padding: 270px 450px 435px;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
-.loader:after {
-  content: ' ';
-  display: block;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 6px solid #fa9c23;
-  border-color: #fa9c23 transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
-}
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: #6d9886;
+  margin-top: -20px;
+  margin-bottom: auto;
 }
 
+.home .content {
+  z-index: 888;
+  color: #fff;
+  width: 70%;
+  margin-top: 50px;
+}
 
-.ind_story{
+.home .content h1 {
+  font-size: 4em;
+  font-weight: 900;
+  letter-spacing: 5px;
+  line-height: 75px;
+  margin-bottom: 40px;
+}
+
+.home .content h1 span {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.home .content a {
+  background: #fff;
+  padding: 20px 35px;
+  color: #212121;
+  font-size: 30px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+.home .content a:hover {
+  background: #d9cab3;
+  color: #fff;
+}
+
+.home .media-icons {
+  z-index: 888;
+  position: absolute;
+  right: 30px;
   display: flex;
   flex-direction: column;
+  transition: 0.5s ease;
 }
 
+.home .media-icons a img {
+  height: 50px;
+  width: 50px;
+  transition: 0.5s ease;
+}
 
+.home .media-icons a:not(:last-child) {
+  margin-bottom: 20px;
+}
 
+.home .media-icons a:hover {
+  transform: scale(1.3);
+}
+
+.home video {
+  z-index: 000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Home-Container::before {
+  z-index: 777;
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Gallery CSS */
+
+.gallery_body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #e0e0e0;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  margin-top: -20px;
+}
+
+.gallery_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.gallery_media {
+  margin-top: 20px;
+  padding: 10px;
+  max-width: 600px;
+  max-height: 500px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery_media img {
+  max-width: 100%;
+  height: auto;
+}
+
+.gallery_layer {
+  opacity: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 90%;
+  background: #fff;
+  color: #151e3f;
+  transition: all 0.9s ease;
+  .PlaceName_Display {
+    transition: all 0.9s ease;
+    transform: scale(0.1);
+  }
+}
+
+.PlaceName_Display {
+  text-align: center;
+  font-size: 600px;
+  letter-spacing: 1px;
+}
+
+.gallery_media:hover .gallery_layer {
+  opacity: 0.8;
+  width: 90%;
+  transition: all 0.5s ease;
+  p {
+    transform: scale(1);
+    transition: all 0.9s ease;
+  }
+}
+
+/* Tour FlashCard CSS */
+.blog-card {
+  @include transition(0.3s);
+  max-width: 300px;
+  margin: 15px;
+  background: #fff;
+  border: 1px solid #cb6074;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.card-img {
+  position: relative;
+  text-align: center;
+  background: #cb6074;
+}
+
+.card-img img {
+  @include transition(0.3s);
+  max-height: 180px;
+  width: 100%;
+  border-bottom: 4px solid #cb6074;
+}
+.card-img img:before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-top: solid 10px #cb6074;
+  border-left: solid 10px transparent;
+  border-right: solid 10px transparent;
+}
+
+.PlaceName {
+  position: absolute;
+  margin: 0;
+  font-size: 42px;
+  bottom: 15px;
+  width: 100%;
+  color: #fff;
+  font-family: "Slabo 27px", serif;
+}
+
+.card-text {
+  padding: 30px 15px;
+  font-family: "Roboto", sans-serif;
+  line-height: 22px;
+}
+
+.read-more {
+  @include transition(0.3s);
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  text-transform: uppercase;
+  background: #cb6074;
+  color: #fff;
+  padding: 15px;
+  margin-bottom: 30px;
+  font-family: "Oswald", sans-serif;
+}
+
+.read-more:hover {
+  background: #c123234b;
+}
