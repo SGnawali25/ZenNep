@@ -17,8 +17,6 @@ exports.createStory = catchAsyncErrors(async(req, res, next) => {
 
     const result = await cloudinary.v2.uploader.upload(req.body.picture,{
         folder: "ZenNep/stories",
-        width: 500,
-        crop: "scale",
     })
 
 

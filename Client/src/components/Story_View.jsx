@@ -40,13 +40,13 @@ function Story_View({story, user}) {
   }, [])
 
   const deleteStoryHandler = async() => {
-
     if (story.user.toString() != user._id.toString() && user.role != 'admin'){
         alert.error("You are not allowed to delete this story")
     } else {
       await dispatch(deleteStory(story._id));
-      dispatch(getStories())
+
       alert.success("Story deleted successfully");
+      navigate("/")
     }
     
 

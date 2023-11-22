@@ -9,35 +9,63 @@ const cloudinary = require('cloudinary');
 
 //create a new place
 exports.createPlace = catchAsyncErrors(async(req, res, next) => {
-    const {name, location, description} = req.body;
-    const user = req.user.id;
+    // const {name, location, description} = req.body;
+    // const user = req.user.id;
 
-    if (!req.body.images){
-        return next(new ErrorHandler("Please upload atleat one picture",401));
+    // if (!req.body.images){
+    //     return next(new ErrorHandler("Please upload atleast one picture",401));
+    // }
+
+    // const result = await cloudinary.v2.uploader.upload(req.body.images,{
+    //     folder: "ZenNep/places",
+    //     quality: 100
+    // })
+
+
+    // const place = await Place.create({
+    //     name,
+    //     location,
+    //     description,
+    //     user,
+    //     images: {
+    //         public_id: result.public_id,
+    //         url: result.secure_url
+    //     }
+    // })
+    
+    // res.status(200).json({
+    //     success: true,
+    //     message: 'Place created successfully',
+    //     place
+    // })
+    let images = []
+    if (typeof req.body.images === 'string') {
+        images.push(req.body.images)
+    } else {
+        images = req.body.images
     }
+    console.log(images)
+    let imagesLinks = [];
+    console.log(images)
 
-    const result = await cloudinary.v2.uploader.upload(req.body.images,{
-        folder: "ZenNep/places",
-        width: 500,
-        crop: "scale",
-        quality: 100
-    })
+    for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.v2.uploader.upload(images[i], {
+            folder: 'ZenNep/places'
+        });
 
-
-    const place = await Place.create({
-        name,
-        location,
-        description,
-        user,
-        images: {
+        imagesLinks.push({
             public_id: result.public_id,
             url: result.secure_url
-        }
-    })
-    
-    res.status(200).json({
+        })
+    }
+
+    req.body.images = imagesLinks
+    req.body.user = req.user.id;
+
+    const place = await Product.create(req.body);
+
+    res.status(201).json({
         success: true,
-        message: 'Place created successfully',
         place
     })
 })

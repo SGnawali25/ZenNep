@@ -96,7 +96,7 @@ export const authReducer = (state = {user: {} }, action) => {
 }
 
 
-export const registerUserReducer = (state = {user: {} }, action) => {
+export const registerUserReducer = (state = {user: {loading: true} }, action) => {
     switch (action.type) {
         case REGISTER_USER_REQUEST:
             return {

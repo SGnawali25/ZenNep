@@ -23,7 +23,6 @@ const Login = () => {
     }
 
 
-
     if (error){
         if (error !== "Please login to view the resources"){
             alert.error(error);
@@ -31,7 +30,7 @@ const Login = () => {
         
         dispatch(clearErrors());
     }
-  },[dispatch, alert, isAuthenticated]);
+  },[dispatch, alert, isAuthenticated, error]);
 
     const submitHandler = async(e) => {
       e.preventDefault();
@@ -49,7 +48,7 @@ const Login = () => {
             <h1>Nepal Tourism</h1>
           </div>
           {/* put image instead of Logo text */}
-          <p className="login_logo">ZenNep</p>
+          <Link to="/"><p className="login_logo">ZenNep</p></Link>
           <div className="Right_Login">
             <h1>Login</h1>
             <form onSubmit={submitHandler}>

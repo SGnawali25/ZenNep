@@ -15,7 +15,7 @@ function Tour_FlashCard({place}) {
             {place.description}
           </p>
         </div>
-        <div className="read-more">Read More</div>
+        <Link to={`/place/${place._id}`}><div className="read-more">Read More</div></Link>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
+import { Link } from "react-router-dom";
 
 import {register, clearErrors, loadUser} from '../actions/userActions'
 
@@ -70,7 +71,7 @@ const Signin = () => {
       </div>
 
       {/* put image instead of Logo text */}
-      <div className="signin_logo">ZenNep</div>
+      <Link to='/'><div className="signin_logo">ZenNep</div></Link>
       <div className="Right_Signin">
         <form onSubmit={submitHandler}>
 
@@ -150,6 +151,7 @@ const Signin = () => {
               name="check_box"
               id="check_box"
               onChange={(e) => setAggreement(!aggreement)}
+              // disabled={aggreement==true}
             />
             I agree to the <u>Terms and Conditions</u>
             and <u>Privacy Policy</u></div>

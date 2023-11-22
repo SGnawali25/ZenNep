@@ -22,6 +22,7 @@ function Story_index() {
   const storiesLoading = useSelector((state) => state.stories.loading) ;
   const authLoading = useSelector((state) => state.auth.loading);
   const createStoryLoading = useSelector((state) => state.createStory.loading);
+  const createStoryError = useSelector((state) => state.createStory.error);
 
   useEffect(()=> {
       setLoading(storiesLoading || authLoading || createStoryLoading);
@@ -58,7 +59,7 @@ const createPost = async(e) => {
 
 
   useEffect(()=> {
-    if (!isAuthenticated && !loading){
+    if (!isAuthenticated){
       alert.error("Please Login to view the stories.")
       navigate("/login")
     }
@@ -66,6 +67,11 @@ const createPost = async(e) => {
     if (error){
       alert.error(error);
       dispatch(clearErrors())
+    }
+
+    if (createStoryError){
+      alert.error(createStoryError);
+      dispatch(clearErrors);
     }
 
     dispatch(getStories())
@@ -117,7 +123,7 @@ const createPost = async(e) => {
                       </div>
                       <button 
                         type="submit"
-                        disabled={loading ? true : false}
+                        disabled={(loading || picture == "") ? true : false}
                         >Post</button>
                     </form>
                   </section>
