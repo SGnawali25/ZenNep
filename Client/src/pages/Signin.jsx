@@ -144,7 +144,7 @@ const Signin = () => {
           <label htmlFor="check_box"></label>
 
 
-          <div div className="forget_text">
+          <div className="forget_text">
             <input
               type="checkbox"
               value={aggreement}
