@@ -71,8 +71,9 @@ const Signin = () => {
       </div>
 
       {/* put image instead of Logo text */}
-      <Link to='/'><div className="signin_logo">ZenNep</div></Link>
+      
       <div className="Right_Signin">
+      <Link to='/'><div className="signin_logo">ZenNep</div></Link>
         <form onSubmit={submitHandler}>
 
           <h1>Sign In</h1>
@@ -133,6 +134,7 @@ const Signin = () => {
                   onChange={onChange}
                 />
 
+                
                 <label htmlFor="custom-file" className="custom-file-label">
                   Choose Avatar
                 </label>
@@ -155,8 +157,9 @@ const Signin = () => {
             />
             I agree to the <u>Terms and Conditions</u>
             and <u>Privacy Policy</u></div>
-
+          <div className="form-content">
           <input type="submit" value="Sign In" />
+          </div>
         </form>
       </div>
     </>

@@ -10,7 +10,7 @@ import Signin from "./pages/Signin";
 import Header from "./components/Header";
 import Story_index from "./pages/Story_index";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Sign_In.css";
+// import "./Sign_In.css";
 import "./App.css";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";

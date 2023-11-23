@@ -3,10 +3,6 @@
   font-family: "Inter";
 }
 
-.login_logo{
-  z-index: 10000;
-}
-
 .Header-component {
   box-sizing: border-box;
   line-height: 1.6;
@@ -21,6 +17,7 @@ nav {
   padding: 20px;
   transition: all 0.4s ease;
   background: #d9cab3;
+  z-index: 100;
 }
 
 nav .nav-content {
@@ -75,7 +72,7 @@ nav .logo a {
   background-color: #f6f6f6;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 10;
 }
 .dropdown-content a {
   color: #212121;
@@ -286,8 +283,8 @@ form textarea:valid ~ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -150px;
-  margin-bottom: -350px;
+  margin-top: -100px;
+  margin-bottom: -250px;
   min-height: 100vh;
   background: #fff;
 }
@@ -314,6 +311,10 @@ form textarea:valid ~ button:hover {
   border-radius: 50%;
   overflow: hidden;
   margin-right: 8px;
+}
+
+.card-details {
+  margin-top: 30px;
 }
 .cover {
   position: absolute;
@@ -611,7 +612,7 @@ input[type="textarea"]::placeholder {
 }
 
 .Home-Container::before {
-  z-index: 777;
+  z-index: 1;
   content: "";
   position: fixed;
   width: 100%;
@@ -694,14 +695,14 @@ input[type="textarea"]::placeholder {
 .blog-card {
   transition: (0.3s);
   max-width: 300px;
+  min-width: 300px;
   margin: 15px;
   background: #fff;
   border: 1px solid #cb6074;
   text-align: center;
   cursor: pointer;
-  &:hover {
-    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-  }
+  max-height: 450px;
+  min-height: 450px;
 }
 
 .card-img {
@@ -711,7 +712,7 @@ input[type="textarea"]::placeholder {
 }
 
 .card-img img {
-  @include transition(0.3s);
+  transition: (0.3s);
   max-height: 180px;
   width: 100%;
   border-bottom: 4px solid #cb6074;
@@ -741,12 +742,12 @@ input[type="textarea"]::placeholder {
 
 .card-text {
   padding: 30px 15px;
-  font-family: "Roboto", sans-serif;
   line-height: 22px;
+  height: 135px;
 }
 
 .read-more {
-  @include transition(0.3s);
+  transition: (0.3s);
   display: inline-block;
   width: auto;
   text-align: center;
@@ -827,7 +828,6 @@ input[type="textarea"]::placeholder {
   padding: 10px auto;
   max-width: 1500px;
   display: flex;
-  align-items: center;
   box-shadow: 5px 5px 10px 0px rgb(0, 0, 0, 0.5);
   height: 1200px;
 }
@@ -838,7 +838,7 @@ input[type="textarea"]::placeholder {
   color: #f6f6f6;
   position: relative;
   height: 100%;
-  width: 1000%;
+  width: 1500vh;
   margin-right: 10px;
 }
 
@@ -1042,6 +1042,88 @@ input:nth-of-type(5):hover ~ i {
   max-width: 80%; /* Limit the content width within the container */
 }
 
+/* Rating_Display CSS */
+
+.comment {
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.user-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.stars {
+  color: #ffd700; /* Yellow color for stars */
+  font-size: 20px;
+}
+
+.rating-value {
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.user-comment {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.user-name {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.back_button {
+  margin: 10px;
+}
+.back_button img {
+  height: 3vh;
+}
+
+/* Comment-Section */
+.comment_section {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.comment_section .userimg {
+  position: relative;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+}
+.commented {
+  outline: none;
+  font-weight: 400;
+  font-size: 16px;
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+
+.scroll-comment {
+  height: 100px;
+  overflow-y: auto;
+}
+
+.No_Comments {
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+  padding-top: 20px;
+  color: #989797;
+}
+
 /* Loader */
 .loader {
   display: block;
@@ -1070,4 +1152,171 @@ input:nth-of-type(5):hover ~ i {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Signin.css */
+.Left_Login {
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url("/img/Login_img.jpg");
+  background-position: left;
+}
+
+.Left_Login h1 {
+  font-size: 50px;
+  font-weight: bold;
+  color: #fff;
+  position: center;
+  top: 40%;
+  right: 0;
+  position: relative;
+  font-family: "Inter";
+  margin: auto;
+  padding: 10px;
+  font-size: 100px;
+}
+
+.Right_Signin {
+  font-family: "Inter";
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  top: 0;
+  left: 45%;
+  right: 0%;
+  overflow-y: auto ;
+}
+
+/* put image instead of p  */
+.signin_logo {
+  position: fixed;
+  padding-right: 20px;
+  top: 0;
+  right: 0;
+
+}
+
+.Right_Signin h1 {
+  font-size: 50px;
+  font-weight: bold;
+  position: center;
+  top: 5%;
+  left: 0;
+  position: relative;
+  font-family: "Inter";
+  /* margin: auto; */
+  padding: 10px;
+  font-size: 100px;
+}
+
+.Right_Signin form {
+  position: absolute;
+  top: 5%;
+  left: 45%;
+  font-family: "Inter";
+  font-size: 100px;
+  width: 45%;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  width: 100% !important;
+  padding: 20px;
+  position: relative;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: 100% !important;
+  padding: 20%;
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  width: 100% !important;
+  padding: 20%;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 1px black solid;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+label {
+  font-size: 30px;
+  width: 45%;
+  margin-bottom: -20px;
+}
+
+.forget_text {
+  font-size: small;
+  display: inline;
+  position: absolute;
+  width: 100%;
+  margin: 10px auto;
+}
+
+.avatar_upload{
+  height:90px;
+  border-radius: 50%;
+  margin: -10px;
+
+}
+
+.custom-file-label{
+  width: 100%;
+  padding: 20%;
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.custom-file-label:hover{
+  width: 100%;
+  padding: 20%;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  border: black solid 1px;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.Right_Signin input[type="file"]{
+  display: none;
+}
+
+.form-content{
+  margin-top: -60px !important;
 }
