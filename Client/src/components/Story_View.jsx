@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { likeStory, getStories, deleteStory } from "../actions/storyActions";
+import { likeStory, deleteStory, commentStory, getStories} from "../actions/storyActions";
 import { useAlert } from "react-alert";
-// import {}
+import Comment_Section from "./Comment_section";
+
 
 function Story_View({story, user}) {
   const dispatch = useDispatch();
@@ -14,6 +15,12 @@ function Story_View({story, user}) {
   const [liker, setLiker] = useState(story.likes.length)
   const [like, setlike] = useState(false);
   const [timeAgoString, settimeAgoString] = useState("20h ago");
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState(story.comments);
+
+  const commentStoryError = useSelector(state=> state.updateStory.error) || ""
+  const newStory =  useSelector(state=> state.updateStory.story);
+
 
   
 
@@ -46,10 +53,8 @@ function Story_View({story, user}) {
       await dispatch(deleteStory(story._id));
 
       alert.success("Story deleted successfully");
-      navigate("/")
+      dispatch(getStories());
     }
-    
-
 
   }
 
@@ -62,6 +67,21 @@ function Story_View({story, user}) {
       setLiker(liker - 1)
     }
     };
+
+  const makeComment = async(e) => {
+      e.preventDefault();
+
+      if(commentStoryError){
+        alert.error(commentStoryError);
+      } else {
+        await dispatch(commentStory(story._id, comment))
+        // dispatch(getStories());
+        setComment("")
+        alert.success("Story commented successfully");
+        dispatch(getStories());
+      }
+    
+  }
   return (
     <div className="Story_View_Container">
       <div className="Story_View">
@@ -72,14 +92,19 @@ function Story_View({story, user}) {
                 <img src={story.userImage} className="cover" />
               </div>
               <h3>
-                {story.name}
+                {story.creator_name}
                 
                 <br />
                 <span className="hour">{timeAgoString}</span>
               </h3>
             </div>
             <div className="dot">
-              <img src="/img/option.png" alt="dot" onClick={deleteStoryHandler}/>
+              <img 
+                  src="/img/delete.png" 
+                  alt="dot" 
+                  onClick={deleteStoryHandler} 
+                  style={{ display: (story.user.toString() === user._id.toString() || user.role === 'admin') ? 'block' : 'none' }}
+                  />
             </div>
           </div>
           <h4 className="meessage">{story.caption}</h4>
@@ -113,11 +138,26 @@ function Story_View({story, user}) {
             <div className="userimg">
               <img src={user.image.url} alt="user" className="cover" />
             </div>
+            <form onSubmit={makeComment}>
             <input
               type="textarea"
               className="text"
               placeholder="Write a comment..."
+              value={comment}
+              name="comment"
+              onChange={e => setComment(e.target.value)}
+              required
+
             ></input>
+            </form>
+          </div>
+
+          <div className="scroll-comment">
+            {
+              comments.length == 0 ? (<div className="No_Comments"> NO COMMENTS YET</div>) :
+              comments.map((comment)=> <Comment_Section comment={comment} key ={comment._id}/>)
+          }
+
           </div>
         </div>
       </div>

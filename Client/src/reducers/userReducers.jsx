@@ -152,12 +152,14 @@ export const changePasswordReducer = (state = { }, action) => {
             return {
                ...state,
                 loading: false,
+                success: true,
                 message: action.payload
             }
         case CHANGE_PASSWORD_FAIL:
             return {
                ...state,
                 loading: false,
+                success: false,
                 error: action.payload
             }
         case CLEAR_ERRORS:
@@ -171,3 +173,38 @@ export const changePasswordReducer = (state = { }, action) => {
             return state;
     }
 }
+
+export const allUsersReducers = (state = {users:[] }, action) => {
+    switch (action.type) {
+        case GET_ALL_USERS_REQUEST:
+            return {
+                loading: true
+            }
+
+        case GET_ALL_USERS_SUCCESS:
+            return {
+               ...state,
+                loading: false,
+                success: true,
+                users: action.payload
+            }
+        case GET_ALL_USERS_FAIL:
+            return {
+               ...state,
+                loading: false,
+                success: false,
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return{
+               ...state,
+               message: null,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+

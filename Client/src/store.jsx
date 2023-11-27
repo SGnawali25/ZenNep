@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import {composeWithDevTools} from'redux-devtools-extension';
 
-import { authReducer, registerUserReducer, changePasswordReducer} from './reducers/userReducers';
+import { authReducer, registerUserReducer, changePasswordReducer, allUsersReducers} from './reducers/userReducers';
 import { getStoriesReducer, createStoryReducer, updateStoryReducer, deleteStoryReducer } from './reducers/storyReducers';
 import { createPlaceReducer, placeDetailsReducer, placesReducer } from './reducers/placeReducers';
 
@@ -18,6 +18,7 @@ const reducer = combineReducers({
     places: placesReducer,
     place: placeDetailsReducer,
     createPlace: createPlaceReducer,
+    users: allUsersReducers
 })
 
 let initialState = {};

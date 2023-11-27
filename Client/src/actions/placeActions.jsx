@@ -43,7 +43,7 @@ import {
 const BACKEND_PREFIX = "http://localhost:4000/api/v1";
 
 //create a place - admin
-export const createPlace = (name, location, description, images) => async (dispatch) => {
+export const createPlace = (placeData) => async (dispatch) => {
     try {
 
         dispatch({ type: CREATE_PLACE_REQUEST })
@@ -55,7 +55,7 @@ export const createPlace = (name, location, description, images) => async (dispa
             withCredentials: true,
         }
 
-        const { data } = await axios.post(`${BACKEND_PREFIX}/register/place`, {name, location, description, images}, config)
+        const { data } = await axios.post(`${BACKEND_PREFIX}/register/place`,placeData , config)
 
         dispatch({
             type: CREATE_PLACE_SUCCESS,
@@ -114,6 +114,29 @@ export const getPlaceDetails = (id) => async (dispatch) => {
     }catch(error){
         dispatch({
             type: PLACE_DETAILS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const createPlaceReview = (id, comment, rating) => async (dispatch) => {
+    try{
+        dispatch({
+            type: CREATE_PLACE_REVIEW_REQUEST
+        })
+
+        const config = {withCredentials: true}
+
+        const {data} = await axios.put(`${BACKEND_PREFIX}/place/${id}`,{comment, rating}, config)
+
+        dispatch({
+            type: CREATE_PLACE_REVIEW_SUCCESS,
+            payload: data.place
+        })
+
+    } catch (error) {
+        dispatch({
+            type: CREATE_PLACE_REVIEW_FAIL,
             payload: error.response.data.message
         })
     }

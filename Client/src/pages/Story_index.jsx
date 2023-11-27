@@ -45,6 +45,7 @@ function Story_index() {
     }
     reader.readAsDataURL(e.target.files[0])
 }
+
 const createPost = async(e) => {
   e.preventDefault();
 
@@ -59,14 +60,16 @@ const createPost = async(e) => {
 
 
   useEffect(()=> {
-    if (!isAuthenticated){
-      alert.error("Please Login to view the stories.")
-      navigate("/login")
+    
+
+    const fetchStories = async() => {
+      await dispatch(getStories());
     }
 
     if (error){
       alert.error(error);
       dispatch(clearErrors())
+      navigate("/login")
     }
 
     if (createStoryError){
@@ -74,8 +77,19 @@ const createPost = async(e) => {
       dispatch(clearErrors);
     }
 
-    dispatch(getStories())
-  }, [dispatch, error, isAuthenticated]);
+    fetchStories();
+    }, [dispatch, error, isAuthenticated]);
+
+
+  useEffect(()=> {
+    if (!isAuthenticated && authLoading == false){
+      alert.error("Please Login to view the resources");
+      dispatch(clearErrors());
+      navigate("/")
+    }
+  }, []);
+
+
   return (
     <>
       <Header/>
@@ -102,7 +116,6 @@ const createPost = async(e) => {
                         name="caption"
                         value={caption}
                         onChange = { (e) => setCaption(e.target.value)}
-                        required
                       />
                       <div className="options">
                         <input 
@@ -112,6 +125,7 @@ const createPost = async(e) => {
                           accept = ".jpg, .png, .pdf"
                           name="picture"
                           onChange={onChange}
+                          required
                         />
 
 
@@ -123,7 +137,7 @@ const createPost = async(e) => {
                       </div>
                       <button 
                         type="submit"
-                        disabled={(loading || picture == "") ? true : false}
+                        disabled={(loading == true || picture === "") ? true : false}
                         >Post</button>
                     </form>
                   </section>
@@ -133,8 +147,8 @@ const createPost = async(e) => {
           </div>
           <div className="storyView">
             <div className="ind_story">
-              {stories.map((story) => (
-                <Story_View key={story._id} story={story} user={user} />
+              {stories && stories.map((story) => (
+                <Story_View key={story._id} story={story} user={user}/>
               ))}
             </div>
           </div>

@@ -1,8 +1,12 @@
 import React from "react";
 import Header from "../components/Header";
 import SlideShow from "../components/SlideShow";
+import first from "/img/bhairabsthan.jpeg";
+import second from "/img/Pashupati.jpeg";
+import third from "/img/Pashupatinath1.jpeg";
 
 function Place_Info() {
+  const arr = [first, second, third]
   return (
     <div>
       <Header />
@@ -13,7 +17,7 @@ function Place_Info() {
         </div>
         <div className="Info_Right">
           <h1> Live, Laugh, Love Nepal</h1>
-          <SlideShow />
+          <SlideShow images={arr}/>
           <div className="information">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus
             provident minus doloribus nostrum ipsum recusandae officiis libero

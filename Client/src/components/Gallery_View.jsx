@@ -9,7 +9,7 @@ function Gallery({place}) {
         <div className="gallery_layer">
           <Link to={`/place/${place._id}`} className="PlaceName_Display">{place.name}</Link>
         </div>
-        <Link to={`/place/${place._id}`}><img src={place.images.url} alt="" /></Link>
+        <Link to={`/place/${place._id}`}><img src={place.images[0].url} alt="" /></Link>
       </div>
     </div>
   );

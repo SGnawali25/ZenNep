@@ -14,7 +14,7 @@ const storySchema = new mongoose.Schema({
             required: true
         }
     },
-    name:{
+    creator_name:{
         type: 'string',
         required: true,
     },

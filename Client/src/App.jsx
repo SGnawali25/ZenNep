@@ -10,7 +10,6 @@ import Signin from "./pages/Signin";
 import Header from "./components/Header";
 import Story_index from "./pages/Story_index";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "./Sign_In.css";
 import "./App.css";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
@@ -20,10 +19,18 @@ import Place_Info from "./pages/Place_Info";
 import About_Nepal from "./pages/About_Nepal";
 import Contact_Us from "./pages/Contact_Us";
 import { loadUser } from "./actions/userActions";
+import userProfile from "./pages/userProfile";
+import changePassword from "./pages/changePassword";
+import AllUsers from "./pages/AllUsers";
 
 function App() {
   useEffect(() => {
-    store.dispatch(loadUser());
+    const fetchUser = async() => {
+      await store.dispatch(loadUser());
+    }
+
+    fetchUser();
+    
   }, []);
 
   return (
@@ -40,6 +47,9 @@ function App() {
           <Route path="/place/:id" Component={Place_Info} exact />
           <Route path="/places" Component={Tour_Display} exact />
           <Route path="/places/search/:keyword" Component={Tour_Display} exact />
+          <Route path="/me" Component={userProfile} exact />
+          <Route path= "/password/change" Component={changePassword} exact />
+          <Route path="/users" Component={AllUsers} exact />
 
           </Routes>
       </Router>

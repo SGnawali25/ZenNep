@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 
 import {register, clearErrors, loadUser} from '../actions/userActions'
 
+import profile from "/img/profile.jpeg"
+
 
 
 
@@ -16,6 +18,7 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [picture, setPicture] = useState("");
+  const [picturePreview, setPicturePreview] = useState(profile);
   const [aggreement, setAggreement] = useState(false);
 
   const dispatch = useDispatch();
@@ -29,7 +32,8 @@ const Signin = () => {
 
     reader.onload = () => {
         if (reader.readyState === 2){
-            setPicture(reader.result)
+            setPicture(reader.result);
+            setPicturePreview(reader.result);
         }
 
     }
@@ -117,7 +121,7 @@ const Signin = () => {
               <div>
                 <figure className='avatar mr-3 item-rt1'>
                   <img
-                    src={picture}
+                    src={picturePreview}
                     className='avatar_upload'
                   />
 

@@ -129,6 +129,32 @@ export const likeStory = (id) => async(dispatch) => {
     }
 }
 
+export const commentStory = (id, comment) => async(dispatch) => {
+    try{
+        dispatch({
+            type: COMMENT_STORY_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            withCredentials: true,
+        }
+
+        const {data} = await axios.post(`${BACKEND_PREFIX}/story/${id}/comment`,{comment}, config)
+        dispatch({
+            type: COMMENT_STORY_SUCCESS,
+            payload: data.story
+        })
+    } catch(error){
+        dispatch({
+            type: COMMENT_STORY_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 
 export const deleteStory = (id) => async(dispatch) => {
     try{
@@ -156,6 +182,8 @@ export const deleteStory = (id) => async(dispatch) => {
         })
     }
 }
+
+
 
 
 export const clearErrors = () => async (dispatch) => {

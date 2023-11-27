@@ -157,7 +157,7 @@ export const logout = () => async(dispatch) => {
 }
 
 //user change password
-export const changePassword = (currentPassword, newPassword, confirmNewPassword) => async (dispatch) => {
+export const changePassword = (passwordData) => async (dispatch) => {
     try{
         dispatch({type: CHANGE_PASSWORD_REQUEST})
 
@@ -168,9 +168,8 @@ export const changePassword = (currentPassword, newPassword, confirmNewPassword)
             withCredentials: true,
         }
 
-        const {data} = await axios.put(`${BACKEND_PREFIX}/password/change`, {currentPassword, newPassword, confirmNewPassword}, config);
+        const {data} = await axios.put(`${BACKEND_PREFIX}/password/change`, passwordData, config);
 
-        
         dispatch({
             type: CHANGE_PASSWORD_SUCCESS,
             payload: data.message
@@ -227,7 +226,7 @@ export const getAllUsers= () => async (dispatch) => {
         
         dispatch({
             type: GET_ALL_USERS_SUCCESS,
-            payload: data.message
+            payload: data.users
         })
     } catch (error){
         dispatch({

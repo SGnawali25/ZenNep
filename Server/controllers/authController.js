@@ -21,6 +21,7 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
     }
 
     var passwordData = validator.checkPassword(password); 
+
     if(!passwordData.isValid){
         return next(new ErrorHandler(passwordData.validationMessage, 400));
     }
@@ -112,6 +113,8 @@ exports.userProfile = catchAsyncErrors( async(req, res, next) => {
 //change the password
 exports.changePassword = catchAsyncErrors( async(req, res, next) => {
     const user = await User.findById(req.user.id).select('+password');
+
+    console.log(req.body)
 
     //confirm the old password
     const currentPassword = req.body.currentPassword;

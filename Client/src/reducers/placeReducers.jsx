@@ -72,19 +72,20 @@ export const placesReducer = (state = { places: []}, action ) => {
 
 export const placeDetailsReducer = (state = { place: {}}, action ) => {
     switch (action.type) {
+        case CREATE_PLACE_REVIEW_REQUEST:
         case PLACE_DETAILS_REQUEST: 
             return {
                 ...state,
             loading: true
             }
-        
+        case CREATE_PLACE_REVIEW_SUCCESS:
         case PLACE_DETAILS_SUCCESS:
             return{
                 ...state,
                 loading: false,
                 place: action.payload
             } 
-            
+        case CREATE_PLACE_REVIEW_FAIL:  
         case PLACE_DETAILS_FAIL:
             return{
                 ...state,

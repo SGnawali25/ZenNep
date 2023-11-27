@@ -9,44 +9,9 @@ const cloudinary = require('cloudinary');
 
 //create a new place
 exports.createPlace = catchAsyncErrors(async(req, res, next) => {
-    // const {name, location, description} = req.body;
-    // const user = req.user.id;
-
-    // if (!req.body.images){
-    //     return next(new ErrorHandler("Please upload atleast one picture",401));
-    // }
-
-    // const result = await cloudinary.v2.uploader.upload(req.body.images,{
-    //     folder: "ZenNep/places",
-    //     quality: 100
-    // })
-
-
-    // const place = await Place.create({
-    //     name,
-    //     location,
-    //     description,
-    //     user,
-    //     images: {
-    //         public_id: result.public_id,
-    //         url: result.secure_url
-    //     }
-    // })
-    
-    // res.status(200).json({
-    //     success: true,
-    //     message: 'Place created successfully',
-    //     place
-    // })
     let images = []
-    if (typeof req.body.images === 'string') {
-        images.push(req.body.images)
-    } else {
-        images = req.body.images
-    }
-    console.log(images)
+    images = req.body.images;
     let imagesLinks = [];
-    console.log(images)
 
     for (let i = 0; i < images.length; i++) {
         const result = await cloudinary.v2.uploader.upload(images[i], {
@@ -62,7 +27,7 @@ exports.createPlace = catchAsyncErrors(async(req, res, next) => {
     req.body.images = imagesLinks
     req.body.user = req.user.id;
 
-    const place = await Product.create(req.body);
+    const place = await Place.create(req.body);
 
     res.status(201).json({
         success: true,
@@ -76,7 +41,12 @@ exports.getPlaces = catchAsyncErrors(async(req, res, next) => {
     const placesCount = await Place.countDocuments();
     let places = await Place.find().sort({ createdAt: -1 });
 
-    places = places.filter(p => p.location.toLowerCase().includes(req.query.keyword.toLowerCase()))
+    const locationSearch = places.filter(p => p.location.toLowerCase().includes(req.query.keyword.toLowerCase()))
+    const nameSearch = places.filter(p => p.name.toLowerCase().includes(req.query.keyword.toLowerCase()))
+    const descriptionSearch = places.filter(p => p.description.toLowerCase().includes(req.query.keyword.toLowerCase()))
+
+    places = Array.from(new Set([...locationSearch, ...nameSearch, ...descriptionSearch]));
+
 
     res.status(200).json({
         success: true,

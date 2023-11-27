@@ -7,7 +7,7 @@ const cloudinary = require('cloudinary')
 exports.createStory = catchAsyncErrors(async(req, res, next) => {
     const {caption} = req.body;
     const user = req.user.id;
-    const name = req.user.name;
+    const creator_name = req.user.name;
     const userImage = req.user.image.url;
 
 
@@ -23,7 +23,7 @@ exports.createStory = catchAsyncErrors(async(req, res, next) => {
     const story = await Story.create({
         caption,
         user,
-        name,
+        creator_name,
         userImage,
         image: {
             public_id: result.public_id,
@@ -92,7 +92,11 @@ exports.deleteStoryById = catchAsyncErrors(async(req,res, next) => {
     if (story.user.toString() !== req.user.id.toString() && req.user.role.toString() !== 'admin'){
         return next(new ErrorHandler("You are not allowed to delete this story", 401));
     }
-    
+
+    await cloudinary.v2.api
+                    .delete_resources([`${story.image.public_id}`], 
+                    { type: 'upload', resource_type: 'image' })
+
     await Story.findByIdAndDelete(req.params.id);
 
     res.status(200).json({
@@ -143,11 +147,14 @@ exports.commentaStoryById = catchAsyncErrors(async(req, res, next) => {
     }
 
 
-    const {text} = req.body;
-    const user = req.user.id;
-    const userImage = req.user.image.url;
-    const name = req.user.name;
-    const comment = {text, user, name, userImage};
+    const text = req.body.comment;
+    if (!text) {
+        return next(new ErrorHandler("Comment text is required", 400));
+    }
+
+    const { id: user, image, name } = req.user;
+    const comment = { text, user, name, userImage: image.url };
+
     story.comments.push(comment)
     await story.save();
 
@@ -187,12 +194,9 @@ exports.deleteComment = catchAsyncErrors(async (req, res, next) => {
     if(!story){
         return next(new ErrorHandler("there is no such a story", 404))
     }
-
-    console.log(req.user.id)
-    console.log(req.params.commentId)
     let comments = story.comments.filter(c => c.user.toString() !== req.user._id.toString() || req.params.commentId.toString() !== c._id.toString())
 
-    console.log(comments)
+    
     if (comments.length === story.comments.length){
         return next(new ErrorHandler("You are not allowed to delete this comment", 401))
     }

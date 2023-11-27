@@ -24,7 +24,7 @@ router.route('/admin/places').get(getAdminPlaces);
 
 router.route('/place/:id')
                             .get(getPlaceById)
-                            .post(isAuthenticatedUser, createPlaceReview)
+                            .put(isAuthenticatedUser, createPlaceReview)
                             
 
 router.route('/admin/place/:id')

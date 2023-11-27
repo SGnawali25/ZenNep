@@ -6,7 +6,7 @@ function Tour_FlashCard({place}) {
     <div>
       <div className="blog-card">
         <div className="card-img">
-          <Link to={`/place/${place._id}`}><img src={place.images.url} /></Link>
+          <Link to={`/place/${place._id}`}><img src={place.images[0].url} /></Link>
           <h1 className="PlaceName">{place.name}</h1>
         </div>
         <div className="card-details"></div>

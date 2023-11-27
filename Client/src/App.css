@@ -377,7 +377,7 @@ ul li img {
   margin-top: -1.5px;
 }
 .dot {
-  transform: rotate(90deg) scale(0.6);
+  /* transform: rotate(90deg) scale(0.6); */
   cursor: pointer;
   margin-top: -16px;
 }
@@ -627,7 +627,7 @@ input[type="textarea"]::placeholder {
   display: flex;
   flex-direction: column;
   background: #e0e0e0;
-  overflow: hidden;
+  overflow-y: auto;
   font-family: "Inter", sans-serif;
   margin-top: -20px;
 }
@@ -1319,4 +1319,17 @@ label {
 
 .form-content{
   margin-top: -60px !important;
+}
+
+
+.users-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.user{
+  /* margin: 20%; */
+
 }

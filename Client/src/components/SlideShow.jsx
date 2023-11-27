@@ -1,13 +1,16 @@
 import React from "react";
 
-function SlideShow() {
+function SlideShow({images, changeImage}) {
+
+  const handleChange = (image) => {
+    changeImage(image);
+  }
   return (
     <div>
       <div className="img_slideshow">
-        <img src="/img/Pashupatinath(1).jpeg"></img>
-        <img src="/img/Pashupatinath(2).jpeg"></img>
-        <img src="/img/Pashupatinath(1).jpeg"></img>
-        <img src="/img/Pashupatinath(2).jpeg"></img>
+        {images.map(image => (
+          <img src={image.url} key={image._id} onClick={() => handleChange(image)}></img>
+        ))}
       </div>
     </div>
   );

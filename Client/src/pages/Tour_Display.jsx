@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
+import picture from '/img/picture.png'
 
 import Tour_FlashCard from "../components/Tour_FlashCard";
 import Header from "../components/Header";
@@ -22,6 +23,7 @@ function Tour_Display() {
   const { places, error, loading } = useSelector(state => state.places);
   const { user, isAuthenticated } = useSelector(state => state.auth);
   const { place } = useSelector(state => state.createPlace)
+  const createPlaceLoading = useSelector(state => state.createPlace.loading);
   const createPlaceError = useSelector(state => state.createPlace.error)
   const userLoading = useSelector(state => state.auth.loading)
 
@@ -29,6 +31,7 @@ function Tour_Display() {
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([]);
+  const [imagesPreview, setImagesPreview] = useState([picture])
   const [role, setRole] = useState("user")
 
 
@@ -67,8 +70,16 @@ function Tour_Display() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.set("name", name);
+    formData.set("location", location);
+    formData.set("description", description);
+    images.forEach(image => {
+      formData.append("images", image)
+    })
 
-    await dispatch(createPlace(name, location, description, images))
+
+    await dispatch(createPlace(formData));
     dispatch(getPlaces())
 
 
@@ -197,7 +208,7 @@ function Tour_Display() {
                       </div>
                       <button
                         type="submit"
-                        disabled={(loading || name == "" || location == "" || description == ""|| images == "") ? true : false}
+                        disabled={(loading||createPlaceLoading== true || name == "" || location == "" || description == ""|| images == "") ? true : false}
                       >Create Place</button>
                     </form>
                   </section>
@@ -210,13 +221,6 @@ function Tour_Display() {
 
       {(loading) ? (<Loader />) : (
         <>
-          {userLoading ? (<Loader />) : (
-
-            <>
-
-            </>
-          )
-          }
 
           <div className="subheader">
             <Searchbar keyword={keyword} />

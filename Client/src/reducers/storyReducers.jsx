@@ -105,11 +105,13 @@ export const createStoryReducer = (state = {story: {} }, action) => {
 
 export const updateStoryReducer = (state = {story: {} }, action) => {
     switch (action.type) {
+        case COMMENT_STORY_REQUEST:
         case LIKE_STORY_REQUEST:
             return {
                 loading: true,
             }
 
+        case COMMENT_STORY_SUCCESS:
         case LIKE_STORY_SUCCESS:
             return {
                ...state,
@@ -118,7 +120,7 @@ export const updateStoryReducer = (state = {story: {} }, action) => {
             }
         
 
-        
+        case COMMENT_STORY_FAIL:
         case LIKE_STORY_FAIL:
             return {
                 loading:false,
