@@ -55,9 +55,15 @@ const changeImage = (image) => {
 
 const submitHandler = (e)=> {
   e.preventDefault();
-  const comment = review;
-  dispatch(createPlaceReview(place._id, comment, rating));
-  setReview("")
+
+  if (rating == 0){
+    alert.error("Please rate this place!!!");
+  } else {
+    const comment = review;
+    dispatch(createPlaceReview(place._id, comment, rating));
+    setReview("")
+  }
+  
 
 
 }  

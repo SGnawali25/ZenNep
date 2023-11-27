@@ -131,6 +131,7 @@ exports.createPlaceReview = catchAsyncErrors(async(req, res, next) => {
         user: req.user._id,
         name: req.user.name,
         rating: Number(rating),
+        reviewerImage: req.user.image.url,
         comment
     }
 

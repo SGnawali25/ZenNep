@@ -40,7 +40,7 @@ const storySchema = new mongoose.Schema({
         },
         userImage: {
             type: String,
-            // required: true
+            required: true
         }
 
     }],

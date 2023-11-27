@@ -51,6 +51,10 @@ const placeSchema = new mongoose.Schema({
             comment: {
                 type: String,
                 required: true
+            },
+            reviewerImage: {
+                type: String,
+                required: true
             }
         }
     ],

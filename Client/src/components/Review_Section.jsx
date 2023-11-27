@@ -6,7 +6,7 @@ function Review_Section({review}) {
     <div>
       <div className="comment_section">
         <div className="userimg">
-          <img src={review} alt="user" className="cover" />
+          <img src={review.reviewerImage} alt="user" className="cover" />
         </div>
         <h6>{review.name} : </h6>
         <div className="commented">{review.comment}</div>
