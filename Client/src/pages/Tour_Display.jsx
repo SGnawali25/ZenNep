@@ -3,37 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
-import picture from '/img/picture.png'
+import picture from "/img/picture.png";
 
 import Tour_FlashCard from "../components/Tour_FlashCard";
 import Header from "../components/Header";
 import Searchbar from "../components/Searchbar";
-import { getPlaces } from '../actions/placeActions'
+import { getPlaces } from "../actions/placeActions";
 import Loader from "../components/Loader";
-import { createPlace, clearErrors } from "../actions/placeActions"
+import { createPlace, clearErrors } from "../actions/placeActions";
 import { loadUser } from "../actions/userActions";
-
 
 function Tour_Display() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
   const params = useParams();
-  const keyword = params.keyword
-  const { places, error, loading } = useSelector(state => state.places);
-  const { user, isAuthenticated } = useSelector(state => state.auth);
-  const { place } = useSelector(state => state.createPlace)
-  const createPlaceLoading = useSelector(state => state.createPlace.loading);
-  const createPlaceError = useSelector(state => state.createPlace.error)
-  const userLoading = useSelector(state => state.auth.loading)
+  const keyword = params.keyword;
+  const { places, error, loading } = useSelector((state) => state.places);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const { place } = useSelector((state) => state.createPlace);
+  const createPlaceLoading = useSelector((state) => state.createPlace.loading);
+  const createPlaceError = useSelector((state) => state.createPlace.error);
+  const userLoading = useSelector((state) => state.auth.loading);
 
-  const [name, setName] = useState("")
-  const [location, setLocation] = useState('')
-  const [description, setDescription] = useState('')
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([picture])
-  const [role, setRole] = useState("user")
-
+  const [imagesPreview, setImagesPreview] = useState([picture]);
+  const [role, setRole] = useState("user");
 
   // const onChange = e => {
 
@@ -48,25 +46,23 @@ function Tour_Display() {
   //   reader.readAsDataURL(e.target.files[0])
   // }
 
+  const onChange = (e) => {
+    const files = Array.from(e.target.files);
 
-  const onChange = e => {
+    setImages([]);
 
-    const files = Array.from(e.target.files)
+    files.forEach((file) => {
+      const reader = new FileReader();
 
-    setImages([])
-
-    files.forEach(file => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setImages(oldArray => [...oldArray, reader.result])
-            }
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImages((oldArray) => [...oldArray, reader.result]);
         }
+      };
 
-        reader.readAsDataURL(file)
-    })
-}
+      reader.readAsDataURL(file);
+    });
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -74,36 +70,30 @@ function Tour_Display() {
     formData.set("name", name);
     formData.set("location", location);
     formData.set("description", description);
-    images.forEach(image => {
-      formData.append("images", image)
-    })
-
+    images.forEach((image) => {
+      formData.append("images", image);
+    });
 
     await dispatch(createPlace(formData));
-    dispatch(getPlaces())
-
+    dispatch(getPlaces());
 
     if (createPlaceError) {
-      alert.error("createPlaceError")
+      alert.error("createPlaceError");
     } else {
-      setName("")
-      setDescription("")
-      setLocation("")
-      setImages([])
-      alert.success("Place created successfully")
+      setName("");
+      setDescription("");
+      setLocation("");
+      setImages([]);
+      alert.success("Place created successfully");
     }
-
-  }
-
-
+  };
 
   useEffect(() => {
-
     const fetchData = async () => {
       try {
         // Dispatch the action to load user data
         await dispatch(loadUser());
-  
+
         // Fetch places
         dispatch(getPlaces(keyword));
       } catch (error) {
@@ -111,38 +101,31 @@ function Tour_Display() {
         console.error("Error loading user data:", error);
       }
     };
-  
+
     // Call fetchData on the initial render
     fetchData();
 
     if (error) {
       alert.error(error.message);
-      dispatch(clearErrors())
-    }
-
-    else if (createPlaceError) {
+      dispatch(clearErrors());
+    } else if (createPlaceError) {
       alert.error(createPlaceError.message);
-      dispatch(clearErrors())
+      dispatch(clearErrors());
     }
-
-
-  }, [keyword, createPlaceError, dispatch])
-
+  }, [keyword, createPlaceError, dispatch]);
 
   useEffect(() => {
-    if(isAuthenticated){
+    if (isAuthenticated) {
       setRole(user.role);
     }
-    
-  }, [isAuthenticated])
+  }, [isAuthenticated]);
 
   return (
     <div>
       <Header />
-      {userLoading == false && role == 'admin' && (
-
+      {userLoading == false && role == "admin" && (
         <div className="create_place">
-          <div className="Story_container">
+          <div className="Story_Container">
             <div className="Story_body">
               <div className="container">
                 <div className="wrapper">
@@ -177,7 +160,7 @@ function Tour_Display() {
                       </div>
 
                       <div className="create_place_input">
-                        <input
+                        <textarea
                           placeholder="Description of the place"
                           spellCheck="false"
                           name="description"
@@ -186,7 +169,6 @@ function Tour_Display() {
                           required
                         />
                       </div>
-
 
                       <div className="options">
                         <input
@@ -199,17 +181,25 @@ function Tour_Display() {
                           multiple
                         />
 
-
                         <ul className="list">
-                          <li>
-                            {/* <img src={picture} /> */}
-                          </li>
+                          <li>{/* <img src={picture} /> */}</li>
                         </ul>
                       </div>
                       <button
                         type="submit"
-                        disabled={(loading||createPlaceLoading== true || name == "" || location == "" || description == ""|| images == "") ? true : false}
-                      >Create Place</button>
+                        disabled={
+                          loading ||
+                          createPlaceLoading == true ||
+                          name == "" ||
+                          location == "" ||
+                          description == "" ||
+                          images == ""
+                            ? true
+                            : false
+                        }
+                      >
+                        Create Place
+                      </button>
                     </form>
                   </section>
                 </div>
@@ -219,9 +209,10 @@ function Tour_Display() {
         </div>
       )}
 
-      {(loading) ? (<Loader />) : (
+      {loading ? (
+        <Loader />
+      ) : (
         <>
-
           <div className="subheader">
             <Searchbar keyword={keyword} />
           </div>

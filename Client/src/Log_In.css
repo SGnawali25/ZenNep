@@ -34,10 +34,11 @@
 .Right_Login {
   font-family: "Inter";
   position: fixed;
-  right: 0;
-  width: 30%;
+  left: 65%;
+  width: 28%;
   height: 100%;
   top: 0;
+  margin: 10px;
 }
 
 /* put image instead of p  */
@@ -130,7 +131,7 @@ label {
   display: inline-block;
 }
 
-.Signup_text{
+.Signup_text {
   font-size: 20px;
   text-align: center;
 }

@@ -107,7 +107,7 @@ nav .logo a {
 
 .container {
   width: 500px;
-  height: 480px;
+  min-height: 480px;
   overflow: hidden;
   background: #ffff;
   border-radius: 10px;
@@ -283,8 +283,8 @@ form textarea:valid ~ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -100px;
-  margin-bottom: -250px;
+  margin-top: -70px;
+  margin-bottom: -150px;
   min-height: 100vh;
   background: #fff;
 }
@@ -395,7 +395,7 @@ ul li img {
 .imgBg {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 520px;
   margin: 10px 0 15px;
   margin-left: -20px;
   overflow: hidden;
@@ -486,8 +486,18 @@ ul li img {
 }
 .addComments {
   display: flex;
-  align-items: center;
+  width: 100%;
   margin-top: 20px;
+}
+.addComments {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.addComments form .text {
+  padding: 10px;
+  width: 100%;
 }
 .addComments .userimg {
   position: relative;
@@ -515,14 +525,6 @@ input[type="text"] {
 
 input[type="textarea"]::placeholder {
   padding: 10px;
-}
-@media (max-width: 640px) {
-  .card {
-    width: 350px;
-  }
-  .imgBg {
-    width: 350px;
-  }
 }
 
 /* Home CSS */
@@ -655,7 +657,7 @@ input[type="textarea"]::placeholder {
 
 .gallery_media img {
   max-width: 100%;
-  height: auto;
+  min-height: 40vh;
 }
 
 .gallery_layer {
@@ -669,16 +671,18 @@ input[type="textarea"]::placeholder {
   background: #fff;
   color: #151e3f;
   transition: all 0.9s ease;
-  .PlaceName_Display {
-    transition: all 0.9s ease;
-    transform: scale(0.1);
-  }
+}
+.PlaceName_Display {
+  transition: all 0.9s ease;
+  transform: scale(0.1);
 }
 
 .PlaceName_Display {
   text-align: center;
   font-size: 600px;
   letter-spacing: 1px;
+  text-decoration: none;
+  color: black;
 }
 
 .gallery_media:hover .gallery_layer {
@@ -691,7 +695,20 @@ input[type="textarea"]::placeholder {
   }
 }
 
+/* Tour Display CSS*/
+.create_place_input textarea {
+  border: #000 1px solid;
+  padding: 10px;
+  margin-top: 5px;
+}
+.create_place_input input {
+  padding: 10px;
+  margin-top: 5px;
+  width: 100%;
+  height: 60px;
+}
 /* Tour FlashCard CSS */
+
 .blog-card {
   transition: (0.3s);
   max-width: 300px;
@@ -1035,13 +1052,11 @@ input:nth-of-type(5):hover ~ i {
   justify-content: center; /* Vertical centering */
   align-items: center; /* Horizontal centering */
 }
-
-.Contact_Content {
-  margin: 20px;
-  padding: 20px;
-  max-width: 80%; /* Limit the content width within the container */
+.Contact_Container textarea {
+  border: #a5a5a5 1px solid;
+  margin-top: 5px;
+  border-radius: 5px;
 }
-
 /* Rating_Display CSS */
 
 .comment {
@@ -1135,7 +1150,7 @@ input:nth-of-type(5):hover ~ i {
   padding-left: 0;
 }
 .loader:after {
-  content: ' ';
+  content: " ";
   display: block;
   width: 64px;
   height: 64px;
@@ -1194,7 +1209,7 @@ input:nth-of-type(5):hover ~ i {
   top: 0;
   left: 45%;
   right: 0%;
-  overflow-y: auto ;
+  overflow-y: auto;
 }
 
 /* put image instead of p  */
@@ -1203,7 +1218,6 @@ input:nth-of-type(5):hover ~ i {
   padding-right: 20px;
   top: 0;
   right: 0;
-
 }
 
 .Right_Signin h1 {
@@ -1282,14 +1296,13 @@ label {
   margin: 10px auto;
 }
 
-.avatar_upload{
-  height:90px;
+.avatar_upload {
+  height: 90px;
   border-radius: 50%;
   margin: -10px;
-
 }
 
-.custom-file-label{
+.custom-file-label {
   width: 100%;
   padding: 20%;
   background-color: black;
@@ -1302,7 +1315,7 @@ label {
   transition: 0.5s ease;
 }
 
-.custom-file-label:hover{
+.custom-file-label:hover {
   width: 100%;
   padding: 20%;
   background-color: white;
@@ -1313,23 +1326,21 @@ label {
   font-size: 20px;
   cursor: pointer;
 }
-.Right_Signin input[type="file"]{
+.Right_Signin input[type="file"] {
   display: none;
 }
 
-.form-content{
+.form-content {
   margin-top: -60px !important;
 }
 
-
-.users-container{
+.users-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 }
 
-.user{
+.user {
   /* margin: 20%; */
-
 }
