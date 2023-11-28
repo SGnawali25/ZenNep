@@ -1,17 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import AboutSlideShow from "../components/AboutSlideShow";
-import first from "/img/bhairabsthan.jpeg";
-import second from "/img/Pashupati.jpeg";
-import third from "/img/Pashupatinath1.jpeg";
+import first from "/img/Nepal_BG.avif";
+import second from "/img/Nepal(1).jpeg";
+import third from "/img/Nepal(3).jpeg";
+import fourth from "/img/Nepal(4).jpeg";
 
 function Place_Info() {
-  const arr = [first, second, third];
-  const [image, setImage] = useState(first)
+  const arr = [first, second, third, fourth];
+  const [image, setImage] = useState(first);
 
   const changeImage = (image) => {
     setImage(image);
-  }
+  };
   return (
     <div>
       <Header />
@@ -22,7 +23,7 @@ function Place_Info() {
         </div>
         <div className="Info_Right">
           <h1> Live, Laugh, Love Nepal</h1>
-          <AboutSlideShow images = {arr} changeImage = {changeImage}/>
+          <AboutSlideShow images={arr} changeImage={changeImage} />
           <div className="information">
             In the cradle of the Himalayas, where heavens kiss the earth's
             embrace, lies Nepal, a land adorned with ethereal grace. Majestic
