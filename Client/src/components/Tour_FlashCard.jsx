@@ -11,7 +11,7 @@ function Tour_FlashCard({ place }) {
           </Link>
           <h1 className="PlaceName">{place.name}</h1>
         </div>
-        <div className="card-details">place location</div>
+        <div className="card-details">{place.location}</div>
         <div className="card-text">
           <p>{place.description}</p>
         </div>
