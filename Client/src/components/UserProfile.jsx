@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const UserProfile = ({user}) => {
-    console.log("userData")
-    console.log(user)
   return (
     <div>
       {user ? (

@@ -38,7 +38,7 @@ exports.createPlace = catchAsyncErrors(async(req, res, next) => {
 
 //get all the places in the database for user
 exports.getPlaces = catchAsyncErrors(async(req, res, next) => {
-    const placesCount = await Place.countDocuments();
+    // const placesCount = await Place.countDocuments();
     let places = await Place.find().sort({ createdAt: -1 });
 
     const locationSearch = places.filter(p => p.location.toLowerCase().includes(req.query.keyword.toLowerCase()))
@@ -50,7 +50,6 @@ exports.getPlaces = catchAsyncErrors(async(req, res, next) => {
 
     res.status(200).json({
         success: true,
-        placesCount,
         places,
         
     })
@@ -110,9 +109,17 @@ exports.updatePlaceById = catchAsyncErrors( async(req, res, next) => {
 //delete place by Id
 exports.deletePlaceById = catchAsyncErrors( async(req,res, next) => {
     const place = await Place.findByIdAndDelete(req.params.id);
-
+    // const place = await Place.findById(req.params.id);
     if(!place){
         return next(new ErrorHandler("There is not such a place to delete", 404));
+    }
+
+    const imageArr = []
+    for (let i = 0; i < place.images.length; i++) {
+        imageArr.push(place.images[i].public_id);
+        await cloudinary.v2.api
+                    .delete_resources([`${place.images[i].public_id}`], 
+                    { type: 'upload', resource_type: 'image' })
     }
 
     res.status(200).json({
