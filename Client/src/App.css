@@ -790,32 +790,33 @@ input[type="textarea"]::placeholder {
 
 /* Searchbar CSS */
 .search {
-  width: 100%;
   position: relative;
-  display: flex;
 }
 
 .search img {
   height: 20px;
+  width: 20px;
 }
 
-.searchTerm {
-  width: 100%;
-  border: 3px solid #212121;
+.search form {
+  width: 80%;
   border-right: none;
-  padding: 5px;
+  padding: 10px;
   height: 20px;
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #9dbfaf;
+  display: flex;
+  position: absolute;
+  right: 62%;
 }
 
 .searchTerm:focus {
   color: #212121;
 }
 
-.searchButton {
-  width: 40px;
+.search .searchButton {
+  width: 70px;
   height: 40px;
   border: 1px solid #212121;
   background: #d9cab3;
@@ -823,6 +824,7 @@ input[type="textarea"]::placeholder {
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
+  display: inline;
 }
 
 .search_wrap {
@@ -830,7 +832,6 @@ input[type="textarea"]::placeholder {
   position: absolute;
   right: 0;
   margin: 10px;
-  padding: 10px;
 }
 
 .subheader {
