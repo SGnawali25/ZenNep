@@ -1346,6 +1346,24 @@ label {
   flex-direction: row;
 }
 
-.user {
-  /* margin: 20%; */
+/* Profile CSS */
+
+.Profile_box {
+  box-sizing: border-box;
+  border: #000 1px solid;
+  width: 50%;
+  align-items: center;
+  position: absolute;
+  left: 25%;
+  margin: auto;
+  box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 1.5);
+}
+
+.Profile_box h2 {
+  padding-left: 70px;
+}
+
+.Profile_Content {
+  padding: 30px;
+  margin-bottom: 30px;
 }
