@@ -856,7 +856,7 @@ input[type="textarea"]::placeholder {
   color: #f6f6f6;
   position: relative;
   height: 100%;
-  width: 1500vh;
+  width: 100vh;
   margin-right: 10px;
 }
 
@@ -917,6 +917,7 @@ input[type="textarea"]::placeholder {
 }
 .Info_Right {
   overflow-y: auto;
+  width: 30%;
   padding: 20px;
 }
 .Rater {
